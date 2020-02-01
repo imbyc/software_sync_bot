@@ -13,3 +13,8 @@
 ## 流程
 
 使用 github Actions 定时运行脚本
+
+
+## 软件同步地址
+
+https://www.lanzous.com/b00z79vkd
