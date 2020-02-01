@@ -10,3 +10,6 @@
 蓝奏云上传使用[LanZouCloud-API](https://github.com/zaxtyson/LanZouCloud-API)项目
 
 
+## 流程
+
+使用 github Actions 定时运行脚本
