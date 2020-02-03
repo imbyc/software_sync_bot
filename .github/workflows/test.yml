@@ -16,7 +16,10 @@ jobs:
           python-version: 3.7
 
     - name: Install LanZouCloud-API
-      run: pip install lanzou-api
+      run: |
+        python -V
+        pip install lanzou-api
+
 
     - name: Install RAR
       run: |
