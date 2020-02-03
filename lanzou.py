@@ -8,9 +8,9 @@ lzy = LanZouCloud()
 code = lzy.login(lanzou_username, lanzou_password)
 if code == LanZouCloud.SUCCESS:
     print('登录成功')
-elif code == LanZouCloud.FAILED
+elif code == LanZouCloud.FAILED:
     print('登录失败')
-elif code == LanZouCloud.NETWORK_ERROR
+elif code == LanZouCloud.NETWORK_ERROR:
     print('网络异常')
 
 
@@ -19,5 +19,5 @@ elif code == LanZouCloud.NETWORK_ERROR
 code = lzy.set_rar_tool('/usr/bin/rar')
 if code == LanZouCloud.SUCCESS:
     print('RAR路径设置成功')
-elif code == LanZouCloud.ZIP_ERROR
+elif code == LanZouCloud.ZIP_ERROR:
     print('RAR路径设置失败')

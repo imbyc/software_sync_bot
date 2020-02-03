@@ -20,7 +20,7 @@ jobs:
 
     - name: Install RAR
       run: |
-       sudo apt-get install unrar
+       sudo apt-get install rar
        whereis rar
 
     - name: Login LanZou
