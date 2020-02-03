@@ -21,3 +21,7 @@ if code == LanZouCloud.SUCCESS:
     print('RAR路径设置成功')
 elif code == LanZouCloud.ZIP_ERROR:
     print('RAR路径设置失败')
+
+# 测试获取文件夹列表
+folders = lzy.get_all_folders_list()
+print(folders)
