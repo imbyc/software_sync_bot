@@ -19,8 +19,6 @@ jobs:
       run: |
         python -V
         pip install lanzou-api
-        pip list
-
 
     - name: Install RAR
       run: |
@@ -29,7 +27,7 @@ jobs:
 
     - name: Login LanZou
       run: |
-        python lanzou.py
+        python lanzouTest.py
       env:
         LANZOU_USERNAME: ${{ secrets.LANZOU_USERNAME }}
         LANZOU_PASSWORD: ${{ secrets.LANZOU_PASSWORD }}
