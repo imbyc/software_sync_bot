@@ -3,7 +3,7 @@ name: Test
 on: [push]
 
 jobs:
-  build:
+  lanzou:
 
     runs-on: ubuntu-latest
 
