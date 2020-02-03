@@ -9,13 +9,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
           python-version: 3.7
+
     - name: Install LanZouCloud-API
       run: pip install lanzou-api
+
     - name: Install RAR
       run: |
-       sudo apt-get install rar
+       sudo apt-get install unrar
        whereis rar
+
+    - name: Login LanZou
+      run: |
+        python lanzou.py
+      env:
+        LANZOU_USERNAME: ${{ secrets.LANZOU_USERNAME }}
+        LANZOU_PASSWORD: ${{ secrets.LANZOU_PASSWORD }}
