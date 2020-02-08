@@ -93,12 +93,16 @@ if ($err) {
 $qiniu = new \App\Upload\Qiniu();
 $qiniu->setBucket($bucket);
 
+$url = 'https://dl.pstmn.io/download/version/7.17.0/windows64';
+$key = 'app/postman/7.17.0/Postman-win64-7.17.0-Setup.exe';
+$qiniu->fetch($url, $key);
+
 $url = 'https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe';
-$key = 'soft/fiddler/5.0.20194.41348/FiddlerSetup-5.0.20194.41348.exe';
+$key = 'app/fiddler/5.0.20194.41348/FiddlerSetup-5.0.20194.41348.exe';
 $qiniu->fetch($url, $key);
 
 $url = 'https://download.jetbrains.com/webide/PhpStorm-2019.3.2.exe';
-$key = 'soft/phpstorm/2019.3.2/PhpStorm-2019.3.2.exe';
+$key = 'app/phpstorm/2019.3.2/PhpStorm-2019.3.2.exe';
 $qiniu->fetch($url, $key);
 
 
