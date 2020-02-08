@@ -6,13 +6,6 @@ use Symfony\Component\Yaml\Yaml;
 
 $ROOT_PATH = dirname(dirname(__FILE__));
 
-$accessKey =  getenv('QINIU_ACCESS_KEY_1');
-$secretKey =  getenv('QINIU_SECRET_KEY_1');
-var_dump($accessKey);
-var_dump($secretKey);
-$qiniu = new \App\Upload\Qiniu();
-die;
-
 ////$url = 'https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe';
 ////$url = 'http://pc1.gtimg.com/guanjia/images/7d/5b/7d5b3c4911f5157e2e2e778d8840d3cd.jpg';
 ////$url = 'https://dl.pstmn.io/download/version/7.17.0/windows64';
@@ -82,8 +75,8 @@ die;
 //
 //die;
 
-$accessKey = 'EeQXJckbbue4otga94iNWpHervr9q5QaQvY8kBHy';
-$secretKey = 'wRonx-upkO2XZxM2YLh0fsoX76MX0kx0sodfLxdm';
+$accessKey = getenv('QINIU_ACCESS_KEY_1');
+$secretKey = getenv('QINIU_SECRET_KEY_1');
 $bucket = 'software-sync-na';
 $key = "index.html";
 $auth = new \Qiniu\Auth($accessKey, $secretKey);
@@ -98,6 +91,8 @@ if ($err) {
 
 // 抓取网络资源到空间
 $qiniu = new \App\Upload\Qiniu();
+$qiniu->setBucket($bucket);
+
 $url = 'https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe';
 $key = 'soft/fiddler/5.0.20194.41348/FiddlerSetup-5.0.20194.41348.exe';
 $qiniu->fetch($url, $key);

@@ -11,8 +11,6 @@ class Qiniu {
     {
         $accessKey =  getenv('QINIU_ACCESS_KEY_'.$no);
         $secretKey =  getenv('QINIU_SECRET_KEY_'.$no);
-        var_dump($accessKey);
-        var_dump($secretKey);
         $this->auth = $this->getAuth($accessKey, $secretKey);
     }
 
@@ -27,7 +25,7 @@ class Qiniu {
     public function isFileExist ($key) {
         $config = new \Qiniu\Config();
         $bucketManager = new \Qiniu\Storage\BucketManager($this->auth, $config);
-        list($fileInfo, $err) = $bucketManager->stat($bucket, $key);
+        list($fileInfo, $err) = $bucketManager->stat($this->bucket, $key);
         if ($err) {
             print_r($err);
         } else {
