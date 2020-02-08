@@ -52,4 +52,16 @@ class Qiniu {
         }
     }
 
+    public function fetch ($url, $key) {
+        $bucketManager = new \Qiniu\Storage\BucketManager($this->auth);
+        // 指定抓取的文件保存名称
+        list($ret, $err) = $bucketManager->fetch($url, $this->bucket, $key);
+        echo "=====> fetch $url to bucket: $this->bucket  key: $key\n";
+        if ($err !== null) {
+            var_dump($err);
+        } else {
+            print_r($ret);
+        }
+    }
+
 }

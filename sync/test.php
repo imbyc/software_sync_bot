@@ -90,18 +90,10 @@ if ($err) {
 }
 
 // 抓取网络资源到空间
-$bucketManager = new \Qiniu\Storage\BucketManager($auth);
-$url = 'https://dl.pstmn.io/download/version/7.17.0/windows64';
-$key = 'soft/postman/7.17.0/Postman-win64-7.17.0-Setup.exe';
-// 指定抓取的文件保存名称
-list($ret, $err) = $bucketManager->fetch($url, $bucket, $key);
-echo "=====> fetch $url to bucket: $bucket  key: $key\n";
-if ($err !== null) {
-    var_dump($err);
-} else {
-    print_r($ret);
-}
-die;
+$qiniu = new \App\Upload\Qiniu();
+$url = 'https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe';
+$key = 'soft/fiddler/5.0.20194.41348/FiddlerSetup-5.0.20194.41348.exe';
+$qiniu->fetch($url, $key);
 
 
 // 获取标准存储的存储量统计
