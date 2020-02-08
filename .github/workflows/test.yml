@@ -16,6 +16,7 @@ jobs:
 
     - name: Test softsync
       run: |
+        php -v
         php -r "echo system('ls -l');"
         php -i | grep curl
         php sync/test.php
