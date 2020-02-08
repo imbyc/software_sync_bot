@@ -77,7 +77,7 @@ $ROOT_PATH = dirname(dirname(__FILE__));
 
 $accessKey = getenv('QINIU_ACCESS_KEY_1');
 $secretKey = getenv('QINIU_SECRET_KEY_1');
-$bucket = 'software-sync';
+$bucket = 'software-sync-na';
 $key = "index.html";
 $auth = new \Qiniu\Auth($accessKey, $secretKey);
 $config = new \Qiniu\Config();
