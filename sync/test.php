@@ -95,6 +95,10 @@ $url = 'https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe';
 $key = 'soft/fiddler/5.0.20194.41348/FiddlerSetup-5.0.20194.41348.exe';
 $qiniu->fetch($url, $key);
 
+$url = 'https://download.jetbrains.com/webide/PhpStorm-2019.3.2.exe';
+$key = 'soft/phpstorm/2019.3.2/PhpStorm-2019.3.2.exe';
+$qiniu->fetch($url, $key);
+
 
 // 获取标准存储的存储量统计
 $params = [

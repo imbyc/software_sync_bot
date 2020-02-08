@@ -10,10 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install Deps
-      run: |
-        sudo apt-get install -y aria2
-
     - name: Test softsync
       run: |
         php -v
@@ -21,5 +17,9 @@ jobs:
         php -i | grep curl
         php sync/test.php
       env:
-        LANZOU_USERNAME: ${{ secrets.LANZOU_USERNAME }}
-        LANZOU_PASSWORD: ${{ secrets.LANZOU_PASSWORD }}
+        QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
+        QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
+        QINIU_ACCESS_KEY_1: ${{ secrets.QINIU_ACCESS_KEY_1 }}
+        QINIU_SECRET_KEY_1: ${{ secrets.QINIU_SECRET_KEY_1 }}
+        QINIU_ACCESS_KEY_2: ${{ secrets.QINIU_ACCESS_KEY_2 }}
+        QINIU_SECRET_KEY_2: ${{ secrets.QINIU_SECRET_KEY_2 }}
