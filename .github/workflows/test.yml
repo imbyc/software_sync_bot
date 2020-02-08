@@ -17,7 +17,7 @@ jobs:
 
     - name: Test softsync
       run: |
-        php -r "echo system('ls -l')";
+        php -r "echo system('ls -l');"
       env:
         LANZOU_USERNAME: ${{ secrets.LANZOU_USERNAME }}
         LANZOU_PASSWORD: ${{ secrets.LANZOU_PASSWORD }}
