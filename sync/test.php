@@ -6,6 +6,13 @@ use Symfony\Component\Yaml\Yaml;
 
 $ROOT_PATH = dirname(dirname(__FILE__));
 
+$accessKey =  getenv('SECRET_TEST');
+//$secretKey =  getenv('QINIU_SECRET_KEY_1');
+var_dump($accessKey);
+//var_dump($secretKey);
+//$qiniu = new \App\Upload\Qiniu();
+die;
+
 ////$url = 'https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe';
 ////$url = 'http://pc1.gtimg.com/guanjia/images/7d/5b/7d5b3c4911f5157e2e2e778d8840d3cd.jpg';
 ////$url = 'https://dl.pstmn.io/download/version/7.17.0/windows64';
