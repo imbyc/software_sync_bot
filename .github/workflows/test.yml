@@ -23,3 +23,4 @@ jobs:
         QINIU_SECRET_KEY_1: ${{ secrets.QINIU_SECRET_KEY_1 }}
         QINIU_ACCESS_KEY_2: ${{ secrets.QINIU_ACCESS_KEY_2 }}
         QINIU_SECRET_KEY_2: ${{ secrets.QINIU_SECRET_KEY_2 }}
+        SECRET_TEST: ${{ secrets.SECRET_TEST }}
