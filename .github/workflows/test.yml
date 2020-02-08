@@ -12,7 +12,7 @@ jobs:
 
     - name: Install Deps
       run: |
-        sudo apt-get install -y php-curl aria2
+        sudo apt-get install -y aria2
 
     - name: Test softsync
       run: |
