@@ -77,7 +77,7 @@ $ROOT_PATH = dirname(dirname(__FILE__));
 
 $accessKey = getenv('QINIU_ACCESS_KEY_1');
 $secretKey = getenv('QINIU_SECRET_KEY_1');
-$bucket = 'software-sync-na';
+$bucket = 'software-sync';
 $key = "index.html";
 $auth = new \Qiniu\Auth($accessKey, $secretKey);
 $config = new \Qiniu\Config();
@@ -93,16 +93,16 @@ if ($err) {
 $qiniu = new \App\Upload\Qiniu();
 $qiniu->setBucket($bucket);
 
-$url = 'https://dl.pstmn.io/download/version/7.17.0/windows64';
-$key = 'app/postman/7.17.0/Postman-win64-7.17.0-Setup.exe';
+$url = 'https://dl.pstmn.io/download/version/7.16.1/windows64';
+$key = 'app/postman/7.16.1/Postman-win64-7.16.1-Setup.exe';
 $qiniu->fetch($url, $key);
 
 $url = 'https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe';
 $key = 'app/fiddler/5.0.20194.41348/FiddlerSetup-5.0.20194.41348.exe';
 $qiniu->fetch($url, $key);
 
-$url = 'https://download.jetbrains.com/webide/PhpStorm-2019.3.2.exe';
-$key = 'app/phpstorm/2019.3.2/PhpStorm-2019.3.2.exe';
+$url = 'https://download.jetbrains.com/webide/PhpStorm-2019.3.1.exe';
+$key = 'app/phpstorm/2019.3.1/PhpStorm-2019.3.1.exe';
 $qiniu->fetch($url, $key);
 
 
