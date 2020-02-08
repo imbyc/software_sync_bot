@@ -1,0 +1,9 @@
+category:
+  - type: ide
+    name: IDE
+  - type: tool
+    name: 工具
+  - type: env
+    name: 运行环境
+  - type: database
+    name: 数据库

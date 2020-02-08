@@ -1,0 +1,122 @@
+softname: phpstorm
+softhomelink: https://www.jetbrains.com/phpstorm/
+softdownloadlink: https://www.jetbrains.com/phpstorm/download
+# 软件图标
+softlogo: http://pc1.gtimg.com/guanjia/images/7d/5b/7d5b3c4911f5157e2e2e778d8840d3cd.jpg
+# 软件列表页banner图
+softbanner: http://pc1.gtimg.com/guanjia/images/42/8b/428b48f4f4687434577386d6d7350060.jpg
+# 软件一句话描述
+softtip: 最佳PHP开发工具
+# 软件介绍
+softcomment: PHP集成开发工具
+# 软件分类,可以多个
+softcategory:
+    - ide
+softspecialtip: 特别说明
+# 是否需要同步
+softsync: false
+# [可选]是否显示在软件列表页,默认为true , 可选值: true false
+softshowinlist: true
+release:
+    win:
+        type: Windows
+        link: https://data.services.jetbrains.com/products?code=PS&release.type=release
+        linktype: json
+        rule:
+            type: array
+            root: 0.releases
+            version: version
+            time: date
+            notes: notesLink
+            features: whatsnew
+            download:
+                root: downloads.windows
+                filename:
+                    type: path
+                    value: link
+                filehash:
+                    type: url
+                    value: checksumLink
+                    # hash链接内容分隔符
+                    delimiter: " "
+                filesize: size
+                fileurl:
+                    type: field
+                    value: link
+
+
+    win-zip:
+        type: Windows-ZIP
+        link: https://data.services.jetbrains.com/products?code=PS&release.type=release
+        linktype: json
+        rule:
+            type: array
+            root: 0.releases
+            version: version
+            time: date
+            notes: notesLink
+            features: whatsnew
+            download:
+                root: downloads.windowsZip
+                filename:
+                    type: path
+                    value: link
+                filehash:
+                    type: url
+                    value: checksumLink
+                    # hash链接内容分隔符
+                    delimiter: " "
+                filesize: size
+                fileurl:
+                    type: field
+                    value: link
+    mac:
+        type: MacOS
+        link: https://data.services.jetbrains.com/products?code=PS&release.type=release
+        linktype: json
+        rule:
+            type: array
+            root: 0.releases
+            version: version
+            time: date
+            notes: notesLink
+            features: whatsnew
+            download:
+                root: downloads.mac
+                filename:
+                    type: path
+                    value: link
+                filehash:
+                    type: url
+                    value: checksumLink
+                    # hash链接内容分隔符
+                    delimiter: " "
+                filesize: size
+                fileurl:
+                    type: field
+                    value: link
+    linux:
+        type: Linux
+        link: https://data.services.jetbrains.com/products?code=PS&release.type=release
+        linktype: json
+        rule:
+            type: array
+            root: 0.releases
+            version: version
+            time: date
+            notes: notesLink
+            features: whatsnew
+            download:
+                root: downloads.linux
+                filename:
+                    type: url
+                    value: link
+                filehash:
+                    type: url
+                    value: checksumLink
+                    # hash链接内容分隔符
+                    delimiter: " "
+                filesize: size
+                fileurl:
+                    type: field
+                    value: link

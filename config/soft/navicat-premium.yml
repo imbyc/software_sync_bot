@@ -1,0 +1,30 @@
+softname: navicat-premium
+softhomelink: https://www.telerik.com/fiddler
+softdownloadlink: https://www.telerik.com/download/fiddler
+# 软件图标
+softlogo: http://pc1.gtimg.com/guanjia/images/7d/5b/7d5b3c4911f5157e2e2e778d8840d3cd.jpg
+# 软件列表页banner图
+softbanner: http://pc1.gtimg.com/guanjia/images/42/8b/428b48f4f4687434577386d6d7350060.jpg
+# 软件一句话描述
+softtip: 抓包工具
+# 软件介绍
+softcomment: 网页调试工具,优秀抓包工具
+# 软件分类,可以多个
+softcategory:
+    - tool
+softspecialtip: 特别说明
+# 是否需要同步
+softsync: false
+# [可选]是否显示在软件列表页,默认为true , 可选值: true false
+softshowinlist: true
+release:
+    win:
+        type: Windows
+        link: https://telerik-fiddler.s3.amazonaws.com/fiddler/fiddler-version-files/new4.txt
+        linktype: txt
+        rule:
+            parser: \App\Parser\FiddlerParser
+            download:
+                fileurl:
+                    type: direct
+                    url: https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe

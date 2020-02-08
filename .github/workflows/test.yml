@@ -3,31 +3,21 @@ name: Test
 on: [push]
 
 jobs:
-  lanzou:
+  Test:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-          python-version: 3.7
-
-    - name: Install LanZouCloud-API
+    - name: Install Deps
       run: |
-        python -V
-        pip install lanzou-api
+        sudo apt-get update
+        sudo apt-get install -y php7.3 php7.3-curl aria2
 
-    - name: Install RAR
+    - name: Test softsync
       run: |
-       sudo apt-get install rar
-       whereis rar
-
-    - name: Login LanZou
-      run: |
-        python lanzouTest.py
+        php -r "echo system('ls -l');
       env:
         LANZOU_USERNAME: ${{ secrets.LANZOU_USERNAME }}
         LANZOU_PASSWORD: ${{ secrets.LANZOU_PASSWORD }}

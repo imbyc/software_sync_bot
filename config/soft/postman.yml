@@ -1,0 +1,90 @@
+softname: postman
+softhomelink: https://www.getpostman.com
+softdownloadlink: https://www.postman.com/downloads/
+# 软件图标
+softlogo: http://pc1.gtimg.com/guanjia/images/7d/5b/7d5b3c4911f5157e2e2e778d8840d3cd.jpg
+# 软件列表页banner图
+softbanner: http://pc1.gtimg.com/guanjia/images/42/8b/428b48f4f4687434577386d6d7350060.jpg
+# 软件一句话描述
+softtip: API调试
+# 软件介绍
+softcomment: API接口开发调试工具
+# 软件分类,可以多个
+softcategory:
+    - tool
+softspecialtip: 特别说明
+# 是否需要同步
+softsync: false
+# [可选]是否显示在软件列表页,默认为true , 可选值: true false
+softshowinlist: true
+release:
+    win:
+        type: Windows
+        link: https://dl.pstmn.io/changelog?channel=stable&platform=win
+        linktype: json
+        linkrequestmethod: GET
+        rule:
+            type: array
+            root: changelog
+            version: name
+            time: createdAt
+            notes: notes
+            features: notes.Features
+            download:
+                root: assets
+                filename:
+                    type: field
+                    value: name
+                filehash:
+                    type: field
+                    value: hash
+                filesize: size
+                fileurl:
+                    type: field
+                    value: url
+    mac:
+        type: MacOS
+        link: https://dl.pstmn.io/changelog?channel=stable&platform=osx
+        linktype: json
+        rule:
+            type: array
+            root: changelog
+            version: name
+            time: createdAt
+            notes: notes
+            features: notes.Features
+            download:
+                root: assets
+                filename:
+                    type: field
+                    value: name
+                filehash:
+                    type: field
+                    value: hash
+                filesize: size
+                fileurl:
+                    type: field
+                    value: url
+    linux:
+        type: Linux(x64)
+        link: https://dl.pstmn.io/changelog?channel=stable&platform=linux
+        linktype: json
+        rule:
+            type: array
+            root: changelog
+            version: name
+            time: createdAt
+            notes: notes
+            features: notes.Features
+            download:
+                root: assets
+                filename:
+                    type: field
+                    value: name
+                filehash:
+                    type: field
+                    value: hash
+                filesize: size
+                fileurl:
+                    type: field
+                    value: url
