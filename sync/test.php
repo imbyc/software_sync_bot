@@ -6,11 +6,11 @@ use Symfony\Component\Yaml\Yaml;
 
 $ROOT_PATH = dirname(dirname(__FILE__));
 
-$accessKey =  getenv('SECRET_TEST');
-//$secretKey =  getenv('QINIU_SECRET_KEY_1');
+$accessKey =  getenv('QINIU_ACCESS_KEY_1');
+$secretKey =  getenv('QINIU_SECRET_KEY_1');
 var_dump($accessKey);
-//var_dump($secretKey);
-//$qiniu = new \App\Upload\Qiniu();
+var_dump($secretKey);
+$qiniu = new \App\Upload\Qiniu();
 die;
 
 ////$url = 'https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe';
