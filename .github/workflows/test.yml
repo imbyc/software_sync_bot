@@ -13,11 +13,11 @@ jobs:
     - name: Install Deps
       run: |
         sudo apt-get update
-        sudo apt-get install -y php7.3 php7.3-curl aria2
+        sudo apt-get install -y php-curl aria2
 
     - name: Test softsync
       run: |
-        php -r "echo system('ls -l');
+        php -r "echo system('ls -l')";
       env:
         LANZOU_USERNAME: ${{ secrets.LANZOU_USERNAME }}
         LANZOU_PASSWORD: ${{ secrets.LANZOU_PASSWORD }}
