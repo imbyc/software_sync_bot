@@ -27,7 +27,17 @@ jobs:
         #config: ${{ secrets.CONFIG }} # ssh_config; optional
     - name: 测试连接 Gitee
       run: ssh -T git@gitee.com
-    - name: 测试修改文件并提交到当前仓库
+    - name: 测试提交文件到Gitee
+      run: |
+        mkdir build
+        git clone git@gitee.com:softsync/softsync.git build
+        cp -r site/ build
+        cd build
+        git add .
+        git commit -m "Add changes" -a
+        git push -u origin master
+        cd ../
+    - name: 测试修改文件并推送到当前仓库
       run: touch temp.json
     - name: 提交文件
       run: |
