@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>❤常用开发软件同步❤</title>
+    <link rel="Shortcut Icon" href="favicon.ico">
+    <link rel="stylesheet" href="statics/css/index.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/dayjs@1.8.25/dayjs.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/cooldev-cn/cdn@master/js/tucao.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fingerprintjs2@2.1.0/fingerprint2.min.js"></script>
+    <script src="statics/js/jquery.template.min.js"></script>
+    <script src="statics/js/polyfill.js"></script>
+    <script src="statics/js/functions.js"></script>
+</head>
+
+<body>
+<div class="bg">
+    <div id="fix-header">
+        <div class="head-inner">
+            <div class="logo">
+                <a href=".">
+                    <img src="logo@64.png">
+                    <span class="name">常用开发软件同步</span>
+                </a>
+            </div>
+            <ul class="head-banner-left">
+                <li><a href=".">首页</a></li>
+                <li><a href="http://cooldev.cn" target="_blank">CoolDev博客</a></li>
+            </ul>
+            <ul class="head-banner-right">
+                <li><a href="javascript:void(0);" target="_blank" onclick="this.href='synclog.html'">同步日志</a></li>
+                <li class="split">|</li>
+                <li><a href="javascript:void(0);" onclick="goTucao()">问题反馈</a></li>
+                <li class="split">|</li>
+                <li class="navi">
+                    <a href="javascript:void(0);" id="share">
+                        <span>分享</span>
+                    </a>
+                    <div class="tip sprite">已复制链接，可直接向好友分享 <i class="close sprite" id="close"></i></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 头部浮层 -->
+    <div id="float-header" class="header">
+        <div class="head-inner">
+            <div class="logo">
+                <a href="">
+                    <img src="logo@64.png">
+                    <span class="name">常用开发软件同步</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="banner">
+        <div id="banner-inner">
+            <div class="banner-wd">好在精选，乐于分享</div>
+            <div class="banner-desc">常用开发软件同步——提升国内下载速度</div>
+            <a href="https://lemon.qq.com/lab/form/index.html" target="_blank" class="banner-recommend"
+               data-stats="recommend">我要提交软件</a>
+        </div>
+    </div>
+
+    <div id="recommend">
+        <div id="recommend-inner">
+            <div class="big-title">软件列表</div>
+            <!-- 应用软件筛选 -->
+            <div class="sort-wrap">
+                <ul class="sort-by-function">
+                    <li class="allApp selected">全部</li>
+                    <!--分类-->
+                    <!--分类-->
+                    <!--分类-->
+                    <!--分类-->
+                </ul>
+                <ul class="sort-by-free">
+                    <li class="allSoft selected">全部</li>
+                    <li class="free">完全免费</li>
+                    <li class="paid">含内购或付费</li>
+                </ul>
+            </div>
+            <div class="recommend-list" id="recommend-list">
+                <div style="text-align:center;">
+                    <img src="statics/img/loading.gif">
+                </div>
+                <!-- 软件列表-->
+                <!-- 软件列表-->
+                <!-- 软件列表-->
+                <!-- 软件列表-->
+            </div>
+            <!-- 没有匹配到筛选 -->
+            <div class="no-match" style="display: none">
+                <img src="statics/img/nomatch.png" class="blankimg" alt="">
+                <p class="blankText">暂无软件</p>
+            </div>
+
+        </div>
+    </div>
+    <input type="text" id="copy-holder" style="position: absolute;left: -10000px;">
+    <div class="footer" id="footer">
+        <div>
+            文件存储由<a href="https://www.upyun.com/" target="_blank" style="line-height: 28px;">
+            <img src="statics/img/upyun_logo.png"
+                 style="height: 20px;margin-bottom: -4px;margin-right: 3px;display: inline-block;" title="又拍云提供云存储赞助">
+        </a>赞助
+        </div>
+
+        <p class="copyright">Since 2020&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Copyright ©<a href="//cooldev.cn"
+                                                                                          target="_blank">CoolDev.cn</a>
+            | <a href="https://github.com/buyucoder/software_sync_bot" target="_blank">本项目开源👉Github</a></p>
+    </div>
+</div>
+
+<script id="temp-category" type="text/template">
+    <% list.forEach(function(item, idx) { %>
+    <li class="<%= item.type %>"><%= item.name %></li>
+    <% }); %>
+</script>
+
+<script type="text/template" id="temp-item">
+    <% list.forEach(function(item, idx) { %>
+    <div class="recommend-item" data-link="./download.html?app=<%= item.softname %>">
+        <div class="item-info">
+            <div class="item-category"><%= item.softshortcomment %></div>
+        </div>
+        <div class="item-bg" style="background-image: url(<%= item.softbanner %>);"></div>
+        <div class="item-comment">
+            <div class="comment-box">
+                <div class="comment-detail">
+                    <img src="<%= item.softlogo %>" alt="" class="item-logo">
+                    <div class="item-name"><%= item.softshowname %></div>
+                    <span class="item-version"><% if(item.latestversion.indexOf('.')!= -1){ %>v<% } %><%= item.latestversion %></span>
+                    <ul class="item-icon" id="icon">
+                        <% item.softicon.forEach(function(item2,idx2){ %>
+                        <% if(item2 == 'paid') { %>
+                        <li class="free-icon data-icon" data-stats="hover.paid">
+                            <div class="pop2">含付费：提供试用或部分高级功能收费</div>
+                        </li>
+                        <% } %>
+                        <% }); %>
+                        <% if(item.softspecialtip != '') { %>
+                        <li class="safe-icon data-icon" data-stats="hover.safe">
+                            <div class="pop3"><%= item.softspecialtip %></div>
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+                <div class="comment-wd">“<%= item.softcomment %>”</div>
+            </div>
+            <div class="comment-info">
+                <div class="comment-name">最后更新</div>
+                <div class="comment-time"><%= item.latestupdatedate %></div>
+                <a class="download" href="<%= item.softdownloadlink %>" target="_blank"
+                   data-stats="click.soft.<%= item.softname %>">
+                    <span class="download-icon"></span>立即下载
+                </a>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+</script>
+
+<script>
+    let APIEndPoint = '';
+    if (document.domain === 'localhost' || document.domain === '127.0.0.1') {
+        APIEndPoint = '..';
+    } else {
+        APIEndPoint = 'http://softsync.cooldev.cn';
+    }
+    var softList = {};
+
+    $(function () {
+        $(document).on('scroll', judgeScroll);
+
+        $.ajax({
+            url: APIEndPoint + '/data/category.json',
+            dataType: "json",
+            type: "get",
+            cache: false,
+            success: function (a) {
+                renderCategory(a);
+            }
+        });
+
+        $.ajax({
+            url: APIEndPoint + '/data/list.json',
+            dataType: "json",
+            type: "get",
+            cache: false,
+            success: function (a) {
+                softList = a;
+                renderList(softList);
+                iconPop();
+            },
+            error: function () {
+                noMatch();
+            }
+        });
+
+        function renderCategory(categoryData) {
+            if (categoryData.category.length) {
+                $('.sort-by-function').append($.fn.render($('#temp-category').html(), {list: categoryData.category}));
+            }
+        }
+
+        function renderList(listData) {
+            if (!$.isEmptyObject(listData)) {
+                $('.no-match').hide();
+                $('#recommend-list').html($.fn.render($('#temp-item').html(), {list: listData}));
+                $('#recommend-list').show();
+            } else {
+                $('#recommend-list').hide();
+                $('.no-match').show();
+            }
+        }
+
+        $(document).on('click', '.recommend-item', function (e) {
+            if ($(this).attr('data-link') && !$(e.target).hasClass('download')) {
+                window.open($(this).attr('data-link'));
+            }
+        });
+
+        // 点击分类筛选应用
+        var sortName = '',
+            iconName = '',
+            condition = {};
+        $(document).on('click', '.sort-by-function li', function () {
+            $(this).addClass('selected');
+            // 获取具有selected的类名的同级类名，用这两个类名去筛选应用
+            sortName = ($(this).attr('class')).split(' ')[0];
+            sortName = sortName === 'allApp' ? '' : sortName;
+            $(this).siblings().removeClass('selected');
+            filterApp(iconName, sortName);
+        });
+        $(document).on('click', '.sort-by-free li', function () {
+            $(this).addClass('selected');
+            // 获取具有selected的类名的同级类名，用这两个类名去筛选应用
+            iconName = ($(this).attr('class')).split(' ')[0];
+            iconName = iconName === 'allSoft' ? '' : iconName;
+            $(this).siblings().removeClass('selected');
+            filterApp(iconName, sortName);
+        });
+
+    });
+
+    // 筛选
+    function multiFiler(condition, data) {
+        return data.filter(function (item) {
+            return Object.keys(condition).every(function (key) {
+                return String(item[key]).toLowerCase().includes(
+                    String(condition[key]).trim().toLocaleLowerCase()
+                )
+            })
+        })
+    }
+
+    // 展示筛选后的应用
+    function filterApp(iconName, sortName) {
+        condition = {
+            softicon: [iconName],
+            softcategory: [sortName]
+        };
+        var filterList = multiFiler(condition, softList);
+        if (filterList.length === 0 || $.isEmptyObject(filterList)) {
+            noMatch();
+        } else {
+            $('.no-match').hide();
+            $('#recommend-list').html($.fn.render($('#temp-item').html(), {list: filterList}));
+            $('#recommend-list').show();
+        }
+        iconPop();
+    }
+
+    // 气泡提示
+    function iconPop() {
+        $('#icon li').mouseenter(function () {
+            var $that = $(this);
+            if ($that.siblings().children().hasClass('show')) {
+                $that.siblings().children().removeClass('show');
+            }
+            $that.children().addClass('show');
+        }).mouseleave(function () {
+            $(this).children().removeClass('show');
+        })
+    }
+
+    // 鼠标滚动
+    function judgeScroll() {
+        var tps = $("html").scrollTop() ? $("html").scrollTop() : $("body").scrollTop();
+        if (tps > 300) {
+            $('#float-header').fadeIn();
+        } else {
+            $('#float-header').fadeOut();
+        }
+    }
+
+    function noMatch() {
+        $('#recommend-list').hide();
+        $('.no-match').show();
+    }
+</script>
+<!--[if lte IE 9]>
+<script src="//ossweb-img.qq.com/images/js/comm/DD_belatedPNG-min.js"></script>
+<script>
+    alert('您的浏览器版本过低，请先升级您的浏览器再来访问！');
+    DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        // url: download.html?app=软件名
+        var APPNAME = '';
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        APPNAME = getQueryString('app');
+        if (APPNAME == null || APPNAME === '') {
+            if (document.domain === 'localhost' || document.domain === '127.0.0.1') {
+                APPNAME = 'phpstorm';
+            } else {
+                window.location = '404.html';
+            }
+        } else {
+            APPNAME = getQueryString('app').toLowerCase();
+        }
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="cooldev.cn">
+    <title>📥{{APPNAME}}-软件下载列表-常用开发软件同步📥</title>
+    <link rel="Shortcut Icon" href="favicon.ico">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1641333_ep7o05j17r.css">
+    <link rel="stylesheet" href="statics/css/download.css">
+</head>
+<body>
+<main>
+    <div id="fix-header">
+        <div class="head-inner">
+            <div class="logo">
+                <a href="." style="color:#000;">
+                    <img src="logo@64.png">
+                    <span class="name">常用开发软件同步</span>
+                </a>
+            </div>
+            <ul class="head-banner-left">
+                <li><a href=".">首页</a></li>
+                <li><a href="http://cooldev.cn" target="_blank">CoolDev博客</a></li>
+            </ul>
+            <ul class="head-banner-right">
+                <li><a href="javascript:void(0);" target="_blank"
+                       onclick="this.href='synclog.html?app='+APPNAME">同步日志</a></li>
+                <li class="split">|</li>
+                <li><a href="javascript:void(0);" onclick="goTucao()">问题反馈</a></li>
+                <li class="split">|</li>
+                <li class="navi">
+                    <a href="javascript:void(0);" id="share">
+                        <span>分享</span>
+                    </a>
+                    <div class="tip sprite">已复制链接，可直接向好友分享 <i class="close sprite" id="close"></i></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layout layout--download-post-download">
+        <div id="download-area" class="download-area">
+            <div class="container-fluid xs-cozy-top">
+                <div class="row">
+                    <div class="column column-md-10 column-md-offset-1 download-table">
+                        <div class="component component--heading-textblock">
+                            <h1 class="heading">{{APPNAME}} 下载列表
+                                <span style="font-size: 1.5rem;" id="latestversion">获取数据...</span>
+                            </h1>
+                            <h3>最后检查时间：<span id="latestchecktime">获取数据...</span></h3>
+                            <div id="app_intro">
+                                <div style="text-align:center;">
+                                    <img src="statics/img/loading.gif">
+                                </div>
+                                <!--软件描述-->
+                            </div>
+                        </div>
+
+                        <div id="latestversion_container">
+                            <!--最新版下载-->
+                        </div>
+
+                        <div id="platform_switch_container">
+                            <!--平台选择-->
+                        </div>
+
+                        <div id="release_container">
+                            <div style="text-align:center;">
+                                <img src="statics/img/loading.gif">
+                            </div>
+                            <!--release-->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<input type="text" id="copy-holder" style="position: absolute;left: -10000px;">
+<footer id="footer" class="footer">
+    <div class="n20">
+        <div class="md-none-bottom">
+            <div class="row flex-container reduced-row">
+                <div class="column md-none-bottom" style="padding-top:25px;text-align: center;">
+                    <p class="copyright">Since 2020&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Copyright ©&nbsp;&nbsp;<a
+                            href="//cooldev.cn" target="_blank">CoolDev.cn</a> | <a
+                            href="https://github.com/buyucoder/software_sync_bot" target="_blank">本项目开源👉Github</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/dayjs@1.8.25/dayjs.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/cooldev-cn/cdn@master/js/tucao.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fingerprintjs2@2.1.0/fingerprint2.min.js"></script>
+<script src="statics/js/jquery.template.min.js"></script>
+<script src="statics/js/polyfill.js"></script>
+<script src="statics/js/functions.js"></script>
+<script type="text/template" id="temp-app-intro">
+    <% if(typeof rls.softofficialhomelink != 'undefined' && rls.softofficialhomelink != '') { %>
+    <p>官网：<span><a href="<%= rls.softofficialhomelink %>" target="_blank"><%= rls.softofficialhomelink %></a></span></p>
+    <% } %>
+    <% if(typeof rls.softofficialhomelink_cn != 'undefined' && rls.softofficialhomelink_cn != '') { %>
+    <p>中文官网：<span><a href="<%= rls.softofficialhomelink_cn %>"
+                     target="_blank"><%= rls.softofficialhomelink_cn %></a></span></p>
+    <% } %>
+    <% if(typeof rls.softofficialdownloadlink != 'undefined' && rls.softofficialdownloadlink != '') { %>
+    <p>官网下载地址：<span><a href="<%= rls.softofficialdownloadlink %>"
+                       target="_blank"><%= rls.softofficialdownloadlink %></a></span></p>
+    <% } %>
+    <% if(typeof rls.softofficialdownloadlink_cn != 'undefined' && rls.softofficialdownloadlink_cn != '') { %>
+    <p>中文官网下载地址：<span><a href="<%= rls.softofficialdownloadlink_cn %>" target="_blank"><%= rls.softofficialdownloadlink_cn %></a></span>
+    </p>
+    <% } %>
+</script>
+<script id="temp-latestdownload" type="text/template">
+    <h3 id="latestdownload">最新版下载 <a href="#latestdownload">¶</a></h3>
+    <div class="section-body">
+        <div class="row mt-sm-4">
+            <!--            可选card windows-card mac-card linux-card -->
+            <!--            可选图标 fa-windows fa-finder fa-linux -->
+            <% list.latestLists.forEach(function(platItem, platform) { %>
+            <div class="col-lg-4">
+                <div class="card card-hero"
+                     onclick="location='<%= CONFIG.domain.filedownload + '/' +platItem.downloadList[0].filekey %>'">
+                    <% if(platform.indexOf('win')!= -1){ %>
+                    <div class="card-header os-card windows-card">
+                        <div class="card-icon"><i class="fab fa-windows"></i></div>
+                        <h4><%= platItem.platformshowname %></h4>
+                        <div class="card-description">最新版本：v<%= platItem.version %></div>
+                        <div class="card-description"><%= platItem.downloadList[0].filename %>（<%=
+                            formatFileSize(platItem.downloadList[0].filesize)%>）
+                        </div>
+                    </div>
+                    <% } else if(platform.indexOf('mac')!= -1){ %>
+                    <div class="card-header os-card mac-card">
+                        <div class="card-icon"><i class="fab fa-finder"></i></div>
+                        <h4><%= platItem.platformshowname %></h4>
+                        <div class="card-description">最新版本：v<%= platItem.version %></div>
+                        <div class="card-description"><%= platItem.downloadList[0].filename %>（<%=
+                            formatFileSize(platItem.downloadList[0].filesize)%>）
+                        </div>
+                    </div>
+                    <% } else if(platform.indexOf('linux')!= -1){ %>
+                    <div class="card-header os-card linux-card">
+                        <div class="card-icon"><i class="fab fa-linux"></i></div>
+                        <h4><%= platItem.platformshowname %></h4>
+                        <div class="card-description">最新版本：v<%= platItem.version %></div>
+                        <div class="card-description"><%= platItem.downloadList[0].filename %>（<%=
+                            formatFileSize(platItem.downloadList[0].filesize)%>）
+                        </div>
+                    </div>
+                    <% } else { %>
+                    <div class="card-header os-card">
+                        <div class="card-icon"><i class="fab"></i></div>
+                        <h4><%= platItem.platformshowname %></h4>
+                        <div class="card-description">最新版本：v<%= platItem.version %></div>
+                        <div class="card-description"><%= platItem.downloadList[0].filename %>（<%=
+                            formatFileSize(platItem.downloadList[0].filesize)%>）
+                        </div>
+                    </div>
+                    <% }%>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+</script>
+
+<script id="temp-platform-switch" type="text/template">
+    <div class="info-switcher-in3-container">
+        <% list.release.forEach(function(platItem, platform, idx) { %>
+        <div class="info-switcher-in3 <% if(idx==0){ %>selected<% }%>" os="<%= platItem.platform %>">
+            <%= platItem.platformshowname %>
+        </div>
+        <% }); %>
+        <div class="clear"></div>
+    </div>
+</script>
+
+<script id="temp-version-list" type="text/template">
+    <% list.release.forEach(function(platItem, platform, pIdx) { %>
+    <div class="<%= platItem.platform %>-container os-container" <% if(isSoftShowPlatform(list.softshowplatform)){ %>style="display: none;"<% } else { %>style="display: block;"<% }%>>
+    <% if(!isSoftShowPlatform(list.softshowplatform)){ %>
+    <% if(platform.indexOf('win')!= -1){ %>
+    <h2 class="card-header os-card windows-card"
+        style="overflow: hidden;height: 56px;line-height: 36px;color:#fff;margin: 1.25rem .3125rem;">
+        <%= platItem.platformshowname%>
+        <div style="float:right;margin-top:-20px;margin-right: -10px;" class="card-icon">
+            <i style="font-size: 90px;" class="fab fa-windows"></i>
+        </div>
+    </h2>
+    <% } else if(platform.indexOf('mac')!= -1){ %>
+    <h2 class="card-header os-card mac-card"
+        style="overflow: hidden;height: 56px;line-height: 36px;color:#fff;margin: 1.25rem .3125rem;">
+        <%= platItem.platformshowname%>
+        <div style="float:right;margin-top:-20px;margin-right: -10px;" class="card-icon">
+            <i style="font-size: 90px;" class="fab fa-finder"></i>
+        </div>
+    </h2>
+    <% } else if(platform.indexOf('linux')!= -1){ %>
+    <h2 class="card-header os-card linux-card"
+        style="overflow: hidden;height: 56px;line-height: 36px;color:#fff;margin: 1.25rem .3125rem;">
+        <%= platItem.platformshowname%>
+        <div style="float:right;margin-top:-20px;margin-right: -10px;" class="card-icon">
+            <i style="font-size: 90px;" class="fab fa-linux"></i>
+        </div>
+    </h2>
+    <% } else { %>
+    <h2 class="card-header os-card"
+        style="overflow: hidden;height: 56px;line-height: 36px;color:#fff;margin: 1.25rem .3125rem;">
+        <%= platItem.platformshowname%>
+        <div style="float:right;margin-top:-20px;margin-right: -10px;" class="card-icon">
+            <i style="font-size: 90px;" class="fab"></i>
+        </div>
+    </h2>
+    <% }%>
+    <% }%>
+
+    <%= renderChannel(platItem, platform) %>
+    </div>
+    <% }); %>
+</script>
+
+<script id="temp-stable-channel" type="text/template">
+    <h3 id="<%= platform%>-stable">稳定版本 <a href="#<%= platform%>-stable">¶</a></h3>
+    <div id="<%= platform%>-stable_channel">
+        <!--稳定版-->
+        <!--稳定版-->
+        <!--稳定版-->
+        <!--稳定版-->
+        <%= list %>
+    </div>
+</script>
+
+<script id="temp-unstable-channel" type="text/template">
+    <h3 id="<%= platform%>-unstable">不稳定版本 <a href="#<%= platform%>-unstable">¶</a></h3>
+    <div id="<%= platform%>-unstable_channel">
+        <!--不稳定版-->
+        <!--不稳定版-->
+        <!--不稳定版-->
+        <!--不稳定版-->
+        <%= list %>
+    </div>
+</script>
+
+<script id="temp-archive-channel" type="text/template">
+    <div class="toggle" id="<%= platform%>-archive">
+        <div class="collapsed">
+            <h3 class="toggleButton" title="点击显示归档版本">归档版本 ▹</h3>
+        </div>
+        <div class="expanded">
+            <h3 class="toggleButton" title="点击隐藏归档版本">归档版本 ▾</h3>
+            <div id="<%= platform%>-archive_channel">
+                <!--归档版本-->
+                <!--归档版本-->
+                <%= list %>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="temp-mix-channel" type="text/template">
+    <h3 id="<%= platform%>-mix">版本列表 <a href="#<%= platform%>-mix">¶</a></h3>
+    <div id="<%= platform%>-mix_channel">
+        <!--不分channel-->
+        <!--不分channel-->
+        <%= list %>
+    </div>
+</script>
+
+<script id="temp-version-item" type="text/template">
+    <div class="<% if(idx==0){ %>toggleVisible<% } else { %>toggle<% }%>" id="<%= versionItem.version%>">
+        <div class="collapsed">
+            <h2 class="toggleButton" title="点击显示该版本下载列表">
+                <%= versionItem.version%> （<%= dayjs.unix(versionItem.timestamp).format('YYYY-MM-DD')%>）▹
+            </h2>
+        </div>
+        <div class="expanded">
+            <h2 class="toggleButton" title="点击隐藏该版本下载列表">
+                <%= versionItem.version%>（<%= dayjs.unix(versionItem.timestamp).format('YYYY-MM-DD')%>）▾
+            </h2>
+
+            <table class="codetable">
+                <thead>
+                <tr class="first">
+                    <th>文件名</th>
+                    <th>文件类型</th>
+                    <th>系统</th>
+                    <th>平台架构</th>
+                    <th>文件大小</th>
+                    <th>Checksum（SHA256）</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% versionItem.downloadList.forEach(function(fileItem, idx) { %>
+                <tr
+                <% if(isFileHighlight(fileItem.filename,platform)){ %>class="highlight"<% }%> >
+                <td class="filename">
+                    <a href="<%= CONFIG.domain.filedownload + '/' +fileItem.filekey %>"><%= fileItem.filename%></a>
+                </td>
+                <td>
+                    <% if(fileItem.filekind!==""){ %>
+                    <%= fileItem.filekind%>
+                    <% } else { %>
+                    <%= fileKindDetector(fileItem.filename)%>
+                    <% }%>
+                </td>
+                <td><%= fileItem.fileos%></td>
+                <td><%= fileItem.filearch%></td>
+                <td><%= formatFileSize(fileItem.filesize, 2)%></td>
+                <td><tt><%= fileItem.filehash%></tt></td>
+                </tr>
+                <% }); %>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</script>
+
+<script>
+    // 系统配置
+    var CONFIG = {
+        domain: {
+            filedownload: 'http://softsync.cooldev.cn'
+        }
+    };
+
+    if (document.domain == 'localhost' || document.domain == '127.0.0.1') {
+        var APIEndPoint = '..';
+    } else {
+        var APIEndPoint = 'http://softsync.cooldev.cn';
+    }
+    var DATAURL = APIEndPoint + '/data/' + APPNAME;
+
+    $.ajax({
+        url: DATAURL + '/lastchecktime.json',
+        dataType: "json",
+        type: "get",
+        cache: false,
+        success: function (a) {
+            $('#latestchecktime').html(dayjs.unix(a.timestamp).format('YYYY-MM-DD HH:mm:ss'));
+        },
+        error: function () {
+            $('#latestchecktime').html("等待更新");
+        }
+    });
+
+    $.ajax({
+        url: DATAURL + '/latestversion.json',
+        dataType: "json",
+        type: "get",
+        cache: false,
+        success: function (a) {
+            $('#latestversion').html('最新版：v' + a.version + '（' + dayjs.unix(a.timestamp).format('YYYY-MM-DD') + '）');
+            // 渲染最新快捷下载
+            renderLatestDownload(a);
+        },
+        error: function () {
+        }
+    });
+
+    $.ajax({
+        url: DATAURL + '/release.json',
+        dataType: "json",
+        type: "get",
+        cache: false,
+        success: function (a) {
+            $('.heading').html($('.heading').html().replace('{{APPNAME}}', a.softshowname));
+            $('title').text($('title').text().replace('{{APPNAME}}', a.softshowname));
+            // 渲染软件介绍
+            renderAppIntro(a);
+            // 渲染release
+            renderRelease(a);
+        },
+        error: function () {
+        }
+    });
+
+    function renderAppIntro(releaseData) {
+        $('#app_intro').html($.fn.render($('#temp-app-intro').html(), {rls: releaseData}));
+    }
+
+    function renderLatestDownload(latestVersion) {
+        $('#latestversion_container').html($.fn.render($('#temp-latestdownload').html(), {list: latestVersion}));
+    }
+
+    function renderRelease(releaseData) {
+        // 是否显示软件平台,适合平台只有少量几个的时候,很多平台(5个以上)不要开,默认false
+        if (isSoftShowPlatform(releaseData.softshowplatform)) {
+            $('#platform_switch_container').html($.fn.render($('#temp-platform-switch').html(), {list: releaseData}));
+        }
+        // 渲染版本
+        renderVersionList(releaseData);
+        // 绑定事件
+        bindToggles(".toggle");
+        bindToggles(".toggleVisible");
+        // 如果显示软件平台,则将第一个平台的软件列表显示
+        if (isSoftShowPlatform(releaseData.softshowplatform)) {
+            $('.os-container').eq(0).show();
+        }
+    }
+
+    function renderVersionList(releaseData) {
+        $('#release_container').html($.fn.render($('#temp-version-list').html(), {list: releaseData}));
+    }
+
+    function renderChannel(platItem, platform) {
+        var stable = '', unstable = '', archive = '', mix = '', versionItemHtml = '';
+        var stableCount = 0, unstableCount = 0, archiveCount = 0, mixCount = 0;
+        platItem.lists.forEach(function (versionItem, version, idx) {
+            // 展示到页面时版本最大数量,多余的版本会显示在归档中,默认5
+            var showVersionMaxNum = 5;
+            if (platItem.showversionmaxnum !== "undefined" && platItem.showversionmaxnum > 0) {
+                showVersionMaxNum = platItem.showversionmaxnum;
+            }
+            // 是否按版本类型进行分类显示,默认为false
+            if (platItem.showgroupbychannel !== "undefined" && platItem.showgroupbychannel) {
+                // 按channel分类显示
+                if (isStableVersion(version, versionItem.channel) && stableCount < showVersionMaxNum) {
+                    stable += renderVersion(versionItem, stableCount, platform);
+                    stableCount++;
+                } else if (!isStableVersion(version, versionItem.channel) && unstableCount < showVersionMaxNum) {
+                    unstable += renderVersion(versionItem, unstableCount, platform);
+                    unstableCount++;
+                } else {
+                    archive += renderVersion(versionItem, archiveCount, platform);
+                    archiveCount++;
+                }
+            } else if (mixCount < showVersionMaxNum) {
+                mix += renderVersion(versionItem, mixCount, platform);
+                mixCount++;
+            } else {
+                archive += renderVersion(versionItem, archiveCount, platform);
+                archiveCount++;
+            }
+        });
+        if (stable) stable = $.fn.render($('#temp-stable-channel').html(), {list: stable, platform: platform});
+        if (unstable) unstable = $.fn.render($('#temp-unstable-channel').html(), {list: unstable, platform: platform});
+        if (mix) mix = $.fn.render($('#temp-mix-channel').html(), {list: mix, platform: platform});
+        if (archive) archive = $.fn.render($('#temp-archive-channel').html(), {list: archive, platform: platform});
+        return stable + unstable + mix + archive;
+    }
+
+    function renderVersion(versionItem, idx, platform) {
+        return $.fn.render($('#temp-version-item').html(), {versionItem: versionItem, idx: idx, platform: platform});
+    }
+
+    $(document).on('click', '.info-switcher-in3', function () {
+        $(".info-switcher-in3").removeClass("selected");
+        $(this).addClass("selected");
+        $('.os-container').hide();
+        var os = $(this).attr("os");
+        $('.' + os + '-container').show();
+    });
+
+    /**
+     * 版本切换事件
+     */
+    function bindToggle(el) {
+        $('.toggleButton', el).click(function () {
+            if ($(this).closest(".toggle, .toggleVisible")[0] !== el) {
+                // Only trigger the closest toggle header.
+                return;
+            }
+            if ($(el).is('.toggle')) {
+                $(el).addClass('toggleVisible').removeClass('toggle');
+            } else {
+                $(el).addClass('toggle').removeClass('toggleVisible');
+            }
+        });
+    }
+
+    function bindToggles(selector) {
+        $(selector).each(function (i, el) {
+            bindToggle(el);
+        });
+    }
+</script>
+</body>
+</html>

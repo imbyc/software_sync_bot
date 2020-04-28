@@ -1,0 +1,21 @@
+bucket:
+  # 中转空间(北美空间,速度快)
+  transitbucket: software-sync-na
+  # 同步空间(实际文件是存在这个里面的,国内空间)
+  syncbucket: software-sync
+domain:
+  website: http://softsync.gitee.io
+  filedownload: http://softsyncfile.cooldev.cn
+# 默认值设置
+default:
+  # 文件上传前缀
+  fileuploadprefix: app/{{softname}}/{{platform}}/{{version}}/
+  # 生成releasenotes.html文件路径
+  gennotespagepath: app/{{softname}}/{{platform}}/{{version}}/releasenotes.html
+  # 获取远程版本最大数量,可以控制丢弃一些老的版本,默认0,不限制
+  getversionmaxnum: 0
+  # 展示到页面时版本最大数量,多余的版本会显示在归档中,默认5
+  showversionmaxnum: 5
+notify:
+  enable: false
+  type: weixin

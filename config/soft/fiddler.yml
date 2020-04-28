@@ -1,32 +1,45 @@
 softname: fiddler
-softhomelink: https://www.telerik.com/fiddler
-softdownloadlink: https://www.telerik.com/download/fiddler
-# 软件图标
-softlogo: http://pc1.gtimg.com/guanjia/images/7d/5b/7d5b3c4911f5157e2e2e778d8840d3cd.jpg
-# 软件列表页banner图
+softshowname: Fiddler
+softofficialhomelink: https://www.telerik.com/fiddler
+softofficialdownloadlink: https://www.telerik.com/download/fiddler
+# 软件图标 最小是 18px*18px 或者是48px*48px
+softlogo: statics/soft/fiddler/logo.png
+# 软件列表页banner图 最小是 380px*178px 或者是 1172px*568px
 softbanner: http://pc1.gtimg.com/guanjia/images/42/8b/428b48f4f4687434577386d6d7350060.jpg
 # 软件一句话描述
-softtip: 抓包工具
+softshortcomment: 抓包工具
 # 软件介绍
-softcomment: 网页调试工具,优秀抓包工具
+softcomment: 网页调试工具，优秀抓包工具
+softspecialtip: 抓包抓得好，牢饭吃到饱
 # 软件分类,可以多个
 softcategory:
     - tool
-softspecialtip: 特别说明
+softicon:
+    - free
 # 是否需要同步
-softsync: false
+softsync: true
 # [可选]是否显示在软件列表页,默认为true , 可选值: true false
 softshowinlist: true
+# [可选]是否显示软件平台,适合平台只有少量几个的时候,很多平台(5个以上)不要开,默认false
+softshowplatform: true
 release:
     win:
-        type: Windows
+        platform: win
+        platformshowname: Windows
         link: https://telerik-fiddler.s3.amazonaws.com/fiddler/fiddler-version-files/new4.txt
         linktype: txt
         rule:
             parser: \App\Parser\FiddlerParser
+            datatype: string
             download:
+                filename:
+                    type: string
+                    value: FiddlerSetup-{{version}}.exe
                 fileurl:
                     type: string
                     value: https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe
                 filesize:
                     type: fromfile
+                fileuploadprefix:
+                    type: string
+                    value: app/{{softname}}/{{platform}}/{{version}}/

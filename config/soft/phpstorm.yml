@@ -1,32 +1,46 @@
 softname: phpstorm
-softhomelink: https://www.jetbrains.com/phpstorm/
-softdownloadlink: https://www.jetbrains.com/phpstorm/download
+softshowname: PhpStorm
+softofficialhomelink: https://www.jetbrains.com/phpstorm/
+softofficialdownloadlink: https://www.jetbrains.com/phpstorm/download
 # 软件图标
-softlogo: http://pc1.gtimg.com/guanjia/images/7d/5b/7d5b3c4911f5157e2e2e778d8840d3cd.jpg
+softlogo: statics/soft/phpstorm/logo.svg
 # 软件列表页banner图
 softbanner: http://pc1.gtimg.com/guanjia/images/42/8b/428b48f4f4687434577386d6d7350060.jpg
 # 软件一句话描述
-softtip: 最佳PHP开发工具
+softshortcomment: 最佳PHP开发工具
 # 软件介绍
 softcomment: PHP集成开发工具
 # 软件分类,可以多个
 softcategory:
     - ide
+softicon:
+    - paid
 softspecialtip: 特别说明
 # 是否需要同步
-softsync: false
+softsync: true
 # [可选]是否显示在软件列表页,默认为true , 可选值: true false
 softshowinlist: true
+# [可选]是否显示软件平台,适合平台只有少量几个的时候,很多平台(5个以上)不要开,默认false
+softshowplatform: true
 release:
     win:
-        type: Windows
+        platform: win
+        platformshowname: Windows
         link: https://data.services.jetbrains.com/products?code=PS&release.type=release
         linktype: json
+        linkrequestmethod: GET
+        # 获取远程版本最大数量,可以控制丢弃一些老的版本,默认50
+        getversionmaxnum: 5
+        # 展示到页面时版本最大数量,多余的版本会显示在归档中,默认5
+        showversionmaxnum: 2
+        # 是否按版本类型进行分类显示,默认为false
+        showgroupbychannel: true
         rule:
-            type: array
+            datatype: array
             root: 0.releases
             version: version
             time: date
+            channel: type
             notes: notesLink
             features: whatsnew
             download:
@@ -43,17 +57,24 @@ release:
                 fileurl:
                     type: field
                     value: link
-
-
     win-zip:
-        type: Windows-ZIP
+        platform: win-zip
+        platformshowname: Windows-ZIP
         link: https://data.services.jetbrains.com/products?code=PS&release.type=release
         linktype: json
+        linkrequestmethod: GET
+        # 获取远程版本最大数量,可以控制丢弃一些老的版本,默认50
+        getversionmaxnum: 5
+        # 展示到页面时版本最大数量,多余的版本会显示在归档中,默认5
+        showversionmaxnum: 5
+        # 是否按版本类型进行分类显示,默认为false
+        showgroupbychannel: true
         rule:
-            type: array
+            datatype: array
             root: 0.releases
             version: version
             time: date
+            channel: type
             notes: notesLink
             features: whatsnew
             download:
@@ -71,14 +92,23 @@ release:
                     type: field
                     value: link
     mac:
-        type: MacOS
+        platform: mac
+        platformshowname: MacOS
         link: https://data.services.jetbrains.com/products?code=PS&release.type=release
         linktype: json
+        linkrequestmethod: GET
+        # 获取远程版本最大数量,可以控制丢弃一些老的版本,默认50
+        getversionmaxnum: 5
+        # 展示到页面时版本最大数量,多余的版本会显示在归档中,默认5
+        showversionmaxnum: 5
+        # 是否按版本类型进行分类显示,默认为false
+        showgroupbychannel: true
         rule:
-            type: array
+            datatype: array
             root: 0.releases
             version: version
             time: date
+            channel: type
             notes: notesLink
             features: whatsnew
             download:
@@ -96,20 +126,29 @@ release:
                     type: field
                     value: link
     linux:
-        type: Linux
+        platform: linux
+        platformshowname: Linux
         link: https://data.services.jetbrains.com/products?code=PS&release.type=release
         linktype: json
+        linkrequestmethod: GET
+        # 获取远程版本最大数量,可以控制丢弃一些老的版本,默认50
+        getversionmaxnum: 5
+        # 展示到页面时版本最大数量,多余的版本会显示在归档中,默认5
+        showversionmaxnum: 5
+        # 是否按版本类型进行分类显示,默认为false
+        showgroupbychannel: true
         rule:
-            type: array
+            datatype: array
             root: 0.releases
             version: version
             time: date
+            channel: type
             notes: notesLink
             features: whatsnew
             download:
                 root: downloads.linux
                 filename:
-                    type: url
+                    type: path
                     value: link
                 filehash:
                     type: url

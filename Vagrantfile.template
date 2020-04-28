@@ -1,0 +1,21 @@
+Vagrant.configure(2) do |config|
+
+  config.vm.box_url = 'https://public00.oss-cn-hangzhou.aliyuncs.com/vagrant-boxes/ubuntu/ubuntu-16.04-docker-oneinstack.virtualbox.box'
+
+  config.vm.box = 'ubuntu-16.04-docker-oneinstack'
+
+  config.vm.hostname = 'ubuntu'
+  
+  config.vm.network "private_network", ip: "192.168.33.15"
+  
+  config.vm.network "forwarded_port", guest: 9501, host: 9501
+  
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder ".", "/home/vagrant/sofosync",owner: "vagrant", group: "vagrant",mount_options: ["dmode=0777,", "fmode=0777"]
+
+  config.vm.provider "virtualbox" do |vb|
+     vb.name = "zhongchou"
+	 vb.memory = "1024"
+  end
+
+end

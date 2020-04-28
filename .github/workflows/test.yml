@@ -10,12 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: 获取IP地址
+      run: curl ipinfo.io
+
     - name: Test softsync
       run: |
         php -v
-        php -r "echo system('ls -l');"
-        php -i | grep curl
-        php sync/test.php
       env:
         QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
         QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
@@ -23,4 +23,3 @@ jobs:
         QINIU_SECRET_KEY_1: ${{ secrets.QINIU_SECRET_KEY_1 }}
         QINIU_ACCESS_KEY_2: ${{ secrets.QINIU_ACCESS_KEY_2 }}
         QINIU_SECRET_KEY_2: ${{ secrets.QINIU_SECRET_KEY_2 }}
-        SECRET_TEST: ${{ secrets.SECRET_TEST }}
