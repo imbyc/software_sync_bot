@@ -13,8 +13,10 @@ jobs:
     - name: 获取IP地址
       run: curl ipinfo.io
     - name: PHP版本
+      run: php -v
+    - name: 测试同步
       run: |
-        php -v
+        php sync/test.php
       env:
         QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
         QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
@@ -33,6 +35,7 @@ jobs:
         git clone git@gitee.com:softsync/softsync.git build
         cp -r site/. build
         cp -r data/ build
+        cp -r app/ build
         cd build
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -43,9 +46,7 @@ jobs:
     - name: 更新 Gitee Pages
       run: |
         curl -X POST --header 'Content-Type: application/json;charset=UTF-8' 'https://gitee.com/api/v5/repos/softsync/softsync/pages/builds' -d '{"access_token":"${{ secrets.GITEE_ACCESS_TOKEN }}"}'
-    - name: 测试修改文件并推送到当前仓库
-      run: touch temp.json
-    - name: 提交文件
+    - name: 提交文件到 Github
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
