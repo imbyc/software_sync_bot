@@ -13,7 +13,7 @@ jobs:
     - name: 获取IP地址
       run: curl ipinfo.io
 
-    - name: Test softsync
+    - name: PHP版本
       run: |
         php -v
       env:
