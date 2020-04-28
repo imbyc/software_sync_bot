@@ -18,12 +18,23 @@ jobs:
       env:
         QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
         QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
-    - name: 安装 SSH key
+    - name: 安装 SSH key of Gitee
       uses: shimataro/ssh-key-action@v2
       with:
         key: ${{ secrets.SSH_KEY }}
         name: id_rsa # optional
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
         #config: ${{ secrets.CONFIG }} # ssh_config; optional
-    - name: 测试连接gitee
+    - name: 测试连接 Gitee
       run: ssh -T git@gitee.com
+    - name: 测试修改文件并提交到当前仓库
+      run: touch temp.json
+    - name: 提交文件
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Add changes" -a
+    - name: 推送更新
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
