@@ -33,6 +33,8 @@ jobs:
         git clone git@gitee.com:softsync/softsync.git build
         cp -r site/ build
         cd build
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add .
         git commit -m "Add changes" -a
         git push -u origin master
