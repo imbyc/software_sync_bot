@@ -31,7 +31,7 @@ jobs:
       run: |
         mkdir build
         git clone git@gitee.com:softsync/softsync.git build
-        cp -r site/ build
+        cp -r site/. build
         cd build
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
