@@ -5,7 +5,7 @@ softofficialdownloadlink: https://www.jetbrains.com/phpstorm/download
 # 软件图标
 softlogo: statics/soft/phpstorm/logo.svg
 # 软件列表页banner图
-softbanner: http://pc1.gtimg.com/guanjia/images/42/8b/428b48f4f4687434577386d6d7350060.jpg
+softbanner: statics/soft/phpstorm/banner.png
 # 软件一句话描述
 softshortcomment: 最佳PHP开发工具
 # 软件介绍

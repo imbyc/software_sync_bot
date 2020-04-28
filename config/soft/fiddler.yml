@@ -5,7 +5,7 @@ softofficialdownloadlink: https://www.telerik.com/download/fiddler
 # 软件图标 最小是 18px*18px 或者是48px*48px
 softlogo: statics/soft/fiddler/logo.png
 # 软件列表页banner图 最小是 380px*178px 或者是 1172px*568px
-softbanner: http://pc1.gtimg.com/guanjia/images/42/8b/428b48f4f4687434577386d6d7350060.jpg
+softbanner: statics/soft/fiddler/banner.png
 # 软件一句话描述
 softshortcomment: 抓包工具
 # 软件介绍

@@ -6,15 +6,16 @@
     "symfony/yaml": "^5.0",
     "symfony/dom-crawler": "^5.0",
     "symfony/serializer": "^5.0",
-    "symfony/process": "^5.0"
+    "symfony/process": "^5.0",
+    "vlucas/phpdotenv": "^4.1"
   },
   "autoload": {
     "psr-4": {
       "App\\": "app/"
     },
     "files": [
-      "app/Utils/init.php",
-      "app/Utils/functions.php"
+      "app/Utils/functions.php",
+      "app/Utils/init.php"
     ]
   },
   "repositories": {

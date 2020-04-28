@@ -1,9 +1,10 @@
 <?php
+
 require 'vendor/autoload.php';
 
 use Symfony\Component\Yaml\Yaml;
 
-define('SOFTNAME', 'phpstorm');
+define('SOFTNAME', '*');
 
 // 遍历config目录
 $syncConfig = [];
@@ -25,7 +26,7 @@ foreach ($syncConfig as $c) {
 
     $processedData = \App\Utils\Process::run($c);
 
-    file_put_contents(ROOT_PATH . '/' . SOFTNAME . '.txt', json_encode($processedData));
+    file_put_contents(ROOT_PATH . '/' . $c['softname'] . '.txt', json_encode($processedData));
 
     if (!$processedData) {
         continue;
@@ -34,10 +35,10 @@ foreach ($syncConfig as $c) {
     // 对已解析的数据进行上传并处理,返回已成功上传的版本
     $processedData = \App\Utils\Sync::run($processedData);
 
-    file_put_contents(ROOT_PATH . '/' . SOFTNAME . '-processed.txt', print_r($processedData, true));
-    file_put_contents(ROOT_PATH . '/' . SOFTNAME . '-processed-json.txt', json_encode($processedData));
+    file_put_contents(ROOT_PATH . '/' . $c['softname'] . '-processed.txt', print_r($processedData, true));
+    file_put_contents(ROOT_PATH . '/' . $c['softname'] . '-processed-json.txt', json_encode($processedData));
 
-    // 生成软件相关数据
+    // 生成数据
     try {
 
         $gen = new \App\Utils\Generation();

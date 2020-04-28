@@ -8,6 +8,8 @@
  * @returns {boolean}
  */
 function isStableVersion(version, channel) {
+    if (!channel) channel = '';
+    if (!version) version = '';
     channel = channel.toLowerCase();
     version = version.toLowerCase();
     if (channel.indexOf('stable') !== -1 || channel.indexOf('release') !== -1) {

@@ -9,6 +9,6 @@ return array(
     '320cde22f66dd4f5d3fd621d3e88b98f' => $vendorDir . '/symfony/polyfill-ctype/bootstrap.php',
     '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
     '841780ea2e1d6545ea3a253239d59c05' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/functions.php',
-    '1d9f6f65d0aa5f5f98a9b39315c33349' => $baseDir . '/app/Utils/init.php',
     'e9f1d2a724e015da1545c4ab6ce7062f' => $baseDir . '/app/Utils/functions.php',
+    '1d9f6f65d0aa5f5f98a9b39315c33349' => $baseDir . '/app/Utils/init.php',
 );

@@ -5,7 +5,7 @@ softofficialdownloadlink: https://www.postman.com/downloads/
 # 软件图标
 softlogo: statics/soft/postman/logo.png
 # 软件列表页banner图
-softbanner: http://pc1.gtimg.com/guanjia/images/42/8b/428b48f4f4687434577386d6d7350060.jpg
+softbanner: statics/soft/postman/banner.png
 # 软件一句话描述
 softshortcomment: API调试
 # 软件介绍
@@ -30,7 +30,7 @@ release:
         linktype: json
         linkrequestmethod: GET
         # 获取远程版本最大数量,可以控制丢弃一些老的版本,默认50
-        getversionmaxnum: 50
+        getversionmaxnum: 6
         # 展示到页面时版本最大数量,多余的版本会显示在归档中,默认5
         showversionmaxnum: 5
         # 是否按版本类型进行分类显示,默认为false
@@ -64,6 +64,13 @@ release:
         platformshowname: MacOS
         link: https://dl.pstmn.io/changelog?channel=stable&platform=osx
         linktype: json
+        linkrequestmethod: GET
+        # 获取远程版本最大数量,可以控制丢弃一些老的版本,默认50
+        getversionmaxnum: 6
+        # 展示到页面时版本最大数量,多余的版本会显示在归档中,默认5
+        showversionmaxnum: 5
+        # 是否按版本类型进行分类显示,默认为false
+        showgroupbychannel: true
         rule:
             datatype: array
             root: changelog
@@ -91,6 +98,13 @@ release:
         platformshowname: Linux(x64)
         link: https://dl.pstmn.io/changelog?channel=stable&platform=linux
         linktype: json
+        linkrequestmethod: GET
+        # 获取远程版本最大数量,可以控制丢弃一些老的版本,默认50
+        getversionmaxnum: 6
+        # 展示到页面时版本最大数量,多余的版本会显示在归档中,默认5
+        showversionmaxnum: 5
+        # 是否按版本类型进行分类显示,默认为false
+        showgroupbychannel: true
         rule:
             datatype: array
             root: changelog

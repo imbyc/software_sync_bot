@@ -7,11 +7,26 @@ define('ROOT_PATH', dirname(dirname(dirname(dirname(__FILE__)))));
 // 系统配置
 $GLOBALS['systemConfig'] = new \App\Utils\Config('config');
 
-// 本地测试用,设置环境变量
-putenv("QINIU_ACCESS_KEY=RrTXes7uP43FcLPSTmqMGC2KhGt0XDGCexBFs4PB");
-putenv("QINIU_SECRET_KEY=tJVpB_DetaPdvcJq-oke6nzzgwv7dDlwn20QE64p");
+// 加载.env文件
+if (file_exists(ROOT_PATH . DIRECTORY_SEPARATOR . 'config/.env')) {
+    $dotenv = Dotenv\Dotenv::createImmutable(ROOT_PATH . DIRECTORY_SEPARATOR . 'config');
+    $dotenv->load();
+}
 
-// 本地测试用,代理设置, IP为物理机IPv4地址
-//define('PROXY', '192.168.1.6:10809');
-define('PROXY', '192.168.1.3:10809');
-define('PROXY_TYPE', CURLPROXY_HTTP);
+if (!getenv('QINIU_ACCESS_KEY')) {
+    showFailLog('QINIU_ACCESS_KEY 未设置');
+    exit(-1);
+}
+if (!getenv('QINIU_SECRET_KEY')) {
+    showFailLog('QINIU_SECRET_KEY 未设置');
+    exit(-1);
+}
+if (getenv('PROXY') && getenv('PROXY_TYPE') != null) {
+    define('PROXY', getenv('PROXY'));
+    define('PROXY_TYPE', getenv('PROXY_TYPE'));
+    showNoticeLog('代理已设置', 'PROXY', getenv('PROXY'), 'PROXY_TYPE', getenv('PROXY_TYPE'));
+    // 检查代理可用性
+    checkProxy(PROXY, PROXY_TYPE);
+} else {
+    showNoticeLog('代理未设置');
+}

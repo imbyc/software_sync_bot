@@ -12,6 +12,43 @@ function systemConfig($key, $default = null)
     return $GLOBALS['systemConfig']->get($key, $default);
 }
 
+/**
+ * 简单检查一下代理可用性
+ * @param $proxy
+ * @param $proxyType
+ * @return bool
+ */
+function checkProxy($proxy, $proxyType)
+{
+    showLog('检查代理可用性');
+    $curl = curl_init();
+    $checkDomain = [
+        'baidu' => 'https://www.baidu.com',
+        'google' => 'https://www.google.com',
+    ];
+    $isUsable = true;
+    foreach ($checkDomain as $domainName => $domain) {
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $domain,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 5,
+            CURLOPT_NOBODY => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_PROXY => $proxy,
+            CURLOPT_PROXYTYPE => $proxyType,
+        ));
+        curl_exec($curl);
+        $httpCode = curl_getinfo($curl)['http_code'];
+        if ($httpCode != 200) $isUsable = false;
+        showLog('访问', $domainName, 'HTTP CODE:', $httpCode == 200 ? greenColorText($httpCode) : redColorText($httpCode));
+    }
+    curl_close($curl);
+    if (!$isUsable) showFailLog('代理不可用'); else showSuccLog('代理可用');
+    return $isUsable;
+}
+
 //====================下面几个是日志输出函数,没啥用============================//
 //====================下面几个是日志输出函数,没啥用============================//
 //====================下面几个是日志输出函数,没啥用============================//
@@ -92,11 +129,19 @@ function yellowColorText($text)
     return "\033[33m" . $text . "\033[0m";
 }
 
+/**
+ * 输出红色的FAIL字符串
+ * @return string
+ */
 function redFail()
 {
     return redColorText('FAIL');
 }
 
+/**
+ * 输出绿色的SUCCESS字符串
+ * @return string
+ */
 function greenSucc()
 {
     return greenColorText('SUCCESS');

@@ -12,14 +12,18 @@ jobs:
 
     - name: 获取IP地址
       run: curl ipinfo.io
-
     - name: PHP版本
       run: |
         php -v
       env:
         QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
         QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
-        QINIU_ACCESS_KEY_1: ${{ secrets.QINIU_ACCESS_KEY_1 }}
-        QINIU_SECRET_KEY_1: ${{ secrets.QINIU_SECRET_KEY_1 }}
-        QINIU_ACCESS_KEY_2: ${{ secrets.QINIU_ACCESS_KEY_2 }}
-        QINIU_SECRET_KEY_2: ${{ secrets.QINIU_SECRET_KEY_2 }}
+    - name: 安装 SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_KEY }}
+        name: id_rsa # optional
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        #config: ${{ secrets.CONFIG }} # ssh_config; optional
+    - name: 测试连接gitee
+      run: ssh -T git@gitee.com
