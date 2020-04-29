@@ -29,6 +29,7 @@ jobs:
         #config: ${{ secrets.CONFIG }} # ssh_config; optional
     - name: 提交文件到 Gitee
       run: |
+        chmod u+x ./deploy/deploy2gitee.sh
         ./deploy/deploy2gitee.sh
     - name: 提交文件到 Github
       run: |
