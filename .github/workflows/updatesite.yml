@@ -21,6 +21,9 @@ jobs:
     - name: 更新基础数据
       run: |
         php sync/updatesite.php
+      env:
+        QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
+        QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
     - name: 安装SSH key for Gitee
       uses: shimataro/ssh-key-action@v2
       with:
