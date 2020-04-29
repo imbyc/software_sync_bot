@@ -317,6 +317,7 @@
                     <th>平台架构</th>
                     <th>文件大小</th>
                     <th>Checksum（SHA256）</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -337,6 +338,11 @@
                 <td><%= fileItem.filearch%></td>
                 <td><%= formatFileSize(fileItem.filesize, 2)%></td>
                 <td><tt><%= fileItem.filehash%></tt></td>
+                <% if (document.domain === 'localhost' || document.domain === '127.0.0.1') { %>
+                <td><a href="../<%= versionItem.gennotespagepath%>" target="_blank">版本日志</a></td>
+                <% } else {%>
+                <td><a href="/<%= versionItem.gennotespagepath%>" target="_blank">版本日志</a></td>
+                <% }%>
                 </tr>
                 <% }); %>
                 </tbody>

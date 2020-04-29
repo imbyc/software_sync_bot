@@ -10,7 +10,7 @@ softbanner: statics/soft/fiddler/banner.png
 softshortcomment: 抓包工具
 # 软件介绍
 softcomment: 网页调试工具，优秀抓包工具
-softspecialtip: 抓包抓得好，牢饭吃到饱
+softspecialtip: 抓包抓得好，牢饭吃到饱😂
 # 软件分类,可以多个
 softcategory:
     - tool

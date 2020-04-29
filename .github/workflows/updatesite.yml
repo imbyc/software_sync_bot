@@ -1,11 +1,12 @@
-name: Sync Task
+name: Update Site
 
 on:
-  schedule:
-    - cron:  '*/30 * * * *'
+  push:
+    branches:
+      - master
 
 jobs:
-  _SyncTask_:
+  _UpdateSite_:
 
     runs-on: ubuntu-latest
 
@@ -17,12 +18,9 @@ jobs:
         curl ipinfo.io
         php -v
         php -r "echo date('Y-m-d H:i:s');"
-    - name: 同步
+    - name: 更新基础数据
       run: |
-        php sync/index.php
-      env:
-        QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
-        QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
+        php sync/updatesite.php
     - name: 安装SSH key for Gitee
       uses: shimataro/ssh-key-action@v2
       with:

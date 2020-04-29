@@ -7,7 +7,7 @@
 
 网站:  http://softsync.gitee.io
 
-[网站存放在[码云 Pages](https://gitee.com/softsync/softsync),软件下载文件存放在七牛云]
+[网站存放在[码云 Pages](https://gitee.com/softsync/softsync),免费,缺点是不能绑定自定义域名]
 
 本项目是在学习 Github Action 时产生的项目，使用 Github Action 定时完成同步任务并生成部署网站页面。
 

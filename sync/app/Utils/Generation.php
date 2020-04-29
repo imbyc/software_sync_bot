@@ -104,8 +104,10 @@ EOF;
 </div></main></body></html>
 EOF;
                         $htmlBody = "<h1>${htmlTitle}</h1>";
-                        if ($versionItem['notes']) {
-                            $htmlBody .= "<h2>更新日志</h2>";
+                        $htmlBody .= "<h2>更新日志</h2>";
+                        if (!isset($versionItem['notes']) || empty($versionItem['notes'])) {
+                            $htmlBody .= "<p>暂无日志</p>";
+                        } else {
                             if (is_array($versionItem['notes'])) {
                                 foreach ($versionItem['notes'] as $key => $item) {
                                     if (!is_int($key)) {
@@ -123,29 +125,38 @@ EOF;
                                         $htmlBody .= "<p>$item</p>";
                                     }
                                 }
+                            } else {
+                                $htmlBody .= $versionItem['notes'];
                             }
                         }
 
                         if ($versionItem['features']) {
                             $htmlBody .= "<h2>新特性</h2>";
-                            if (is_array($versionItem['features'])) {
-                                foreach ($versionItem['features'] as $key => $item) {
-                                    if (!is_int($key)) {
-                                        $htmlBody .= "<p>$key</p>";
-                                    }
-                                    if (is_array($item)) {
-                                        if (Util::isIndexedArray($item)) {
-                                            $htmlBody .= '<ul>';
-                                            foreach ($item as $value) {
-                                                $htmlBody .= "<li>$value</li>";
-                                            }
-                                            $htmlBody .= '</ul>';
+                            if (!isset($versionItem['features']) || empty($versionItem['features'])) {
+                                $htmlBody .= "<p>暂无新特性</p>";
+                            } else {
+                                if (is_array($versionItem['features'])) {
+                                    foreach ($versionItem['features'] as $key => $item) {
+                                        if (!is_int($key)) {
+                                            $htmlBody .= "<p>$key</p>";
                                         }
-                                    } else {
-                                        $htmlBody .= "<p>$item</p>";
+                                        if (is_array($item)) {
+                                            if (Util::isIndexedArray($item)) {
+                                                $htmlBody .= '<ul>';
+                                                foreach ($item as $value) {
+                                                    $htmlBody .= "<li>$value</li>";
+                                                }
+                                                $htmlBody .= '</ul>';
+                                            }
+                                        } else {
+                                            $htmlBody .= "<p>$item</p>";
+                                        }
                                     }
+                                } else {
+                                    $htmlBody .= $versionItem['features'];
                                 }
                             }
+
                         }
 
                         $ret = Util::writeFile($versionItem['gennotespagepath'], $htmlHeader . $htmlBody . $htmlFooter);

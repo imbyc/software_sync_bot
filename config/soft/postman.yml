@@ -10,7 +10,7 @@ softbanner: statics/soft/postman/banner.png
 softshortcomment: API调试
 # 软件介绍
 softcomment: API接口开发调试工具
-softspecialtip: 特别说明
+softspecialtip: 我才不告诉你这个东西也能抓包😎
 # 软件分类,可以多个
 softcategory:
     - tool

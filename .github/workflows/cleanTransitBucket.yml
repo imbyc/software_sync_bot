@@ -1,0 +1,25 @@
+name: Clean Transit Bucket
+
+on:
+  schedule:
+    - cron:  '20 23 * * *'
+
+jobs:
+  _CleanTransitBucket_:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: 获取IP地址&PHP版本&当前时间
+      run: |
+        curl ipinfo.io
+        php -v
+        php -r "echo date('Y-m-d H:i:s');"
+    - name: 清理中转空间文件
+      run: |
+        php sync/cleanTransitBucket.php
+      env:
+        QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
+        QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
