@@ -30,7 +30,7 @@ li{list-style:none}
 #banner-inner img{height:280px}
 .banner-wd{color:#fff;font-size:51px;text-align:center;height:112px;line-height:112px;width:100%;position:absolute;top:30px;left:0;letter-spacing:2px}
 .banner-desc{font-size:19px;text-align:center;margin-top:-13px;height:30px;line-height:30px;width:800px;position:absolute;top:140px;left:50%;margin-left:-400px;color:#fff;opacity:.8}
-.banner-recommend{background-image:url(../../statics/img/df92a98d6ee4fb7634a734112f7a5e6d.png);background-position:-123px -179px;background-size:436px 222px;font-size:14px;text-align:center;height:38px;line-height:38px;width:115px;position:absolute;top:197px;left:46.5%;color:#fff;cursor:pointer}
+.banner-recommend{background-image:url(../../statics/img/df92a98d6ee4fb7634a734112f7a5e6d.png);background-position:-123px -179px;background-size:436px 222px;font-size:14px;text-align:center;height:38px;line-height:38px;width:115px;position:absolute;top:220px;left:46.5%;color:#fff;cursor:pointer}
 .big-title{font-size:24px;color:#515151;padding:0 20px}
 #free{width:100%;margin-top:20px}
 #free-inner{width:1240px;margin:0 auto}

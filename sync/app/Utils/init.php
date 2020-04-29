@@ -1,4 +1,7 @@
 <?php
+// 显示所有错误
+ini_set('display_errors', true);
+error_reporting(E_ALL);
 
 // 初始化系统
 
@@ -27,6 +30,4 @@ if (getenv('PROXY') && getenv('PROXY_TYPE') != null) {
     showNoticeLog('代理已设置', 'PROXY', getenv('PROXY'), 'PROXY_TYPE', getenv('PROXY_TYPE'));
     // 检查代理可用性
     checkProxy(PROXY, PROXY_TYPE);
-} else {
-    showNoticeLog('代理未设置');
 }

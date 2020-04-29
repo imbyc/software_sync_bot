@@ -14,6 +14,11 @@ class Process
      */
     public static function run($syncConfig, $processPlatform = null, $forceSync = false)
     {
+        if (!$syncConfig['softname']) {
+            showFailLog('softname为空');
+            return false;
+        }
+
         showLog('当前处理软件:', $syncConfig['softname']);
 
         if (!$forceSync && isset($syncConfig['softsync']) && !$syncConfig['softsync']) {

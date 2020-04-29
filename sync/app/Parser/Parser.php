@@ -292,12 +292,37 @@ class Parser implements ParserInterface
         if (!isset($rule['download'])) {
             return null;
         }
-
+        // [release][平台][rule][download]
         $downloadParserRule = $rule['download'];
-        $downloadDataRoot = $downloadParserRule['root'];
-        $remoteDownloadData = Util::arrayDataGet($data, $downloadDataRoot);
 
         $downloadList = [];
+
+        // string 远程数据是字符串
+        // array 远程数据是数组,循环去获取
+        switch ($this->parserRule['datatype']) {
+            case "array":
+                $downloadList = $this->parserArrayRemoteDownloadData($data, $downloadParserRule);
+                break;
+            case "string":
+                $downloadList = $this->parserStringRemoteDownloadData($data, $downloadParserRule);
+                break;
+            default:
+                break;
+        }
+
+        return $downloadList;
+    }
+
+    /**
+     * 解析远程Download数据为数组的文件
+     * @param $data
+     * @param $downloadParserRule
+     * @return array|null
+     */
+    private function parserArrayRemoteDownloadData($data, $downloadParserRule)
+    {
+        $downloadDataRoot = $downloadParserRule['root'];
+        $remoteDownloadData = Util::arrayDataGet($data, $downloadDataRoot);
 
         /**
          * $remoteDownloadData 可能会存在为空的情况,一般都是很老的版本,可能没有下载链接,
@@ -314,43 +339,100 @@ class Parser implements ParserInterface
             $remoteDownloadData = [$remoteDownloadData];
         }
 
+        $downloadList = [];
+
         foreach ($remoteDownloadData as $item) {
-
-            // 文件下载链接
-            $fileurl = $this->parserFileUrl($item, $downloadParserRule);
-
-            // 文件下载链接很重要,如果没有文件下载链接,就下载不了文件,直接跳过
-            if (empty($fileurl)) {
-                continue;
+            if ($singleFileInfo = $this->parserFile($item, $downloadParserRule)) {
+                $downloadList[] = $singleFileInfo;
             }
-
-            // 文件名
-            $filename = $this->parserFileName($item, $downloadParserRule);
-
-            // 文件大小 (可能需要下载后从文件计算)
-            $filesize = $this->parserFileSize($item, $downloadParserRule);
-
-            // 文件Hash
-            $filehash = $this->parserFileHash($item, $downloadParserRule);
-
-            // 文件种类
-            $filekind = $this->parserFileKind($item, $downloadParserRule);
-
-            // 文件适用的系统
-            $fileos = $this->parserFileOS($item, $downloadParserRule);
-
-            // 文件适用平台
-            $filearch = $this->parserFileArch($item, $downloadParserRule);
-
-            // 文件上传时路径前缀
-            $fileuploadprefix = $this->parserFileUploadPrefix($item, $downloadParserRule);
-
-            // 合并变量到数组
-            $downloadList[] = compact('filename', 'filehash', 'filesize', 'fileurl', 'filekind', 'fileos', 'filearch', 'fileuploadprefix');
-
         }
 
         return $downloadList;
+    }
+
+    /**
+     * 解析远程数据为空的文件
+     * @param $data
+     * @param $downloadParserRule
+     * @return array|null
+     */
+    private function parserStringRemoteDownloadData($data, $downloadParserRule)
+    {
+        $downloadList = [];
+        if ($singleFileInfo = $this->parserFile($data, $downloadParserRule)) {
+            $downloadList[] = $singleFileInfo;
+        }
+        return $downloadList;
+    }
+
+    /**
+     * 解析单个文件
+     * @param $item
+     * @param $downloadParserRule
+     * @return array|null
+     */
+    private function parserFile($item, $downloadParserRule)
+    {
+        // 文件下载链接
+        $fileurl = $this->parserFileUrl($item, $downloadParserRule);
+
+        // 文件下载链接很重要,如果没有文件下载链接,就下载不了文件,直接跳过
+        if (empty($fileurl)) {
+            return null;
+        }
+
+        // 文件名
+        $filename = $this->parserFileName($item, $downloadParserRule);
+
+        // 文件大小 (可能需要下载后从文件计算)
+        $filesize = $this->parserFileSize($item, $downloadParserRule);
+
+        // 文件Hash
+        $filehash = $this->parserFileHash($item, $downloadParserRule);
+
+        // 文件种类
+        $filekind = $this->parserFileKind($item, $downloadParserRule);
+
+        // 文件适用的系统
+        $fileos = $this->parserFileOS($item, $downloadParserRule);
+
+        // 文件适用平台
+        $filearch = $this->parserFileArch($item, $downloadParserRule);
+
+        // 文件上传时路径前缀
+        $fileuploadprefix = $this->parserFileUploadPrefix($item, $downloadParserRule);
+
+        // 合并变量到数组
+        return compact('filename', 'filehash', 'filesize', 'fileurl', 'filekind', 'fileos', 'filearch', 'fileuploadprefix');
+
+    }
+
+    /**
+     * 解析文件下载地址
+     * @param $data
+     * @param $rule
+     * @return mixed
+     */
+    public function parserFileUrl($data, $rule)
+    {
+        // 如果没有这个键值就返回null
+        if (!isset($rule['fileurl'])) {
+            return null;
+        }
+
+        $fileurlKey = $rule['fileurl'];
+        switch (strtolower($fileurlKey['type'])) {
+            case 'field':
+                $fileurl = Util::arrayDataGet($data, $fileurlKey['value']);
+                break;
+            case 'string':
+                $fileurl = $fileurlKey['value'];
+                break;
+            default:
+                $fileurl = Util::arrayDataGet($data, $fileurlKey['value']);
+                break;
+        }
+        return $fileurl;
     }
 
     /**
@@ -413,6 +495,7 @@ class Parser implements ParserInterface
             switch ($filehashKey['type']) {
                 case 'url':
                     $hashUrl = Util::arrayDataGet($data, $filehashKey['value']);
+                    showLog('从远程文件解析 filehash');
                     $response = HttpRequest::get($hashUrl);
                     $filehash = explode($filehashKey['delimiter'], $response)[0];
                     break;
@@ -439,34 +522,6 @@ class Parser implements ParserInterface
         }
         $filesizeKey = $rule['filesize'];
         return Util::arrayDataGet($data, $filesizeKey);
-    }
-
-    /**
-     * 解析文件下载地址
-     * @param $data
-     * @param $rule
-     * @return mixed
-     */
-    public function parserFileUrl($data, $rule)
-    {
-        // 如果没有这个键值就返回null
-        if (!isset($rule['fileurl'])) {
-            return null;
-        }
-
-        $fileurlKey = $rule['fileurl'];
-        switch (strtolower($fileurlKey['type'])) {
-            case 'field':
-                $fileurl = Util::arrayDataGet($data, $fileurlKey['value']);
-                break;
-            case 'string':
-                $fileurl = $fileurlKey['value'];
-                break;
-            default:
-                $fileurl = Util::arrayDataGet($data, $fileurlKey['value']);
-                break;
-        }
-        return $fileurl;
     }
 
     /**
@@ -507,7 +562,7 @@ class Parser implements ParserInterface
     {
         // 如果没有这个键值就返回platform
         if (!isset($rule['fileos'])) {
-            return $rule[''];
+            return $this->platformConfig['platform'];
         }
 
         $fileosKey = $rule['fileos'];

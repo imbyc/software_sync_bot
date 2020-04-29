@@ -13,7 +13,7 @@ softcomment: 网页调试工具,优秀抓包工具
 softspecialtip: 特别说明
 # 软件分类,可以多个
 softcategory:
-    - tool
+    - env
 softicon:
     - free
 # 是否需要同步

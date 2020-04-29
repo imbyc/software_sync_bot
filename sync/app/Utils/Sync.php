@@ -58,6 +58,9 @@ class Sync
                         $downloadItem['filethissync'] = true;
                     }
 
+                    // 测试
+//                    $downloadItem['filethissync'] = true;
+
                     // 文件已经存在,或者文件上传成功,写入 filesize 和 filekey
                     // 七牛云会返回一个数组, 其中$ret['fsize']表示文件大小
                     // 如果 $downloadItem['filesize']为空,将 $ret['fsize'] 赋给 $downloadItem['filesize'];

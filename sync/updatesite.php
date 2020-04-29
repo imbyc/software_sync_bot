@@ -1,6 +1,12 @@
 <?php
-
+/**
+ * 基础数据更新
+ * 当修改了软件的一些基本信息,如修改了软件的描述,更换了图片,等等,在代码Push到仓库的时候触发
+ * 去更新这些基础数据,不是同步
+ */
 require 'vendor/autoload.php';
+
+use App\Utils\Generation;
 
 use Symfony\Component\Yaml\Yaml;
 
@@ -23,47 +29,25 @@ if (empty($syncConfig)) {
 }
 
 foreach ($syncConfig as $c) {
-
-    $processedData = \App\Utils\Process::run($c);
-
-    file_put_contents(ROOT_PATH . '/' . $c['softname'] . '.txt', json_encode($processedData));
-
-    if (!$processedData) {
-        continue;
-    }
-
-    // 对已解析的数据进行上传并处理,返回已成功上传的版本
-    $processedData = \App\Utils\Sync::run($processedData);
-
-    file_put_contents(ROOT_PATH . '/' . $c['softname'] . '-processed.txt', print_r($processedData, true));
-    file_put_contents(ROOT_PATH . '/' . $c['softname'] . '-processed-json.txt', json_encode($processedData));
-
-    // 生成数据
     try {
+        // 将release置为空,因为这里不是同步,只是基础数据更新
+        $c['release'] = [];
+        $processedData = $c;
 
-        $gen = new \App\Utils\Generation();
+        $gen = new Generation();
 
         $gen->setSoftData($processedData);
 
+        // 只有这两项需要更新
         $gen->genRelease();
-        $gen->genLatestVersion();
         $gen->genLastCheckTime();
-        $gen->genReleaseNotes();
-        $gen->genSyncLog();
-        $gen->genVersionData();
 
-        // 生成全局数据
+        // 全局数据更新这个
         $gen->genIndexList();
         $gen->genCategory();
-        $gen->genGlobalSyncLog();
         $gen->genGlobalLastCheckTime();
 
     } catch (\Exception $e) {
         showFailLog($e->getMessage());
     }
 }
-
-
-
-
-

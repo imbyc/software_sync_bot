@@ -44,7 +44,7 @@ class Qiniu
         $bucketManager = new \Qiniu\Storage\BucketManager($this->auth, $config);
         list($fileInfo, $err) = $bucketManager->stat($bucket, $key);
         if ($err) {
-            showLog("is $key in bucket: $bucket ?", redColorText('NO'), "ErrCode:", $err->code(), "ErrMsg:", $err->message());
+            showLog("检查 $key 是否在: $bucket ?", redColorText('NO'), "ErrCode:", $err->code(), "ErrMsg:", $err->message());
             return false;
         }
 //        Array
@@ -56,7 +56,7 @@ class Qiniu
 //            [putTime] => 15814118086371303
 //            [type] => 0
 //        )
-        showLog("is $key in bucket: $bucket ?", greenColorText('YES'));
+        showLog("检查 $key 是否在: $bucket ?", greenColorText('YES'));
         return $fileInfo;
     }
 
@@ -246,10 +246,16 @@ class Qiniu
         }
         // 获取文件列表,1000个
         $lists = $this->getFileList($prefix, 1000, '', $bucket);
+
+        if ((!isset($lists['items']) || empty($lists['items'])) && (!isset($lists['commonPrefixes']) || empty($lists['commonPrefixes']))) {
+            showSuccLog("无需清理bucket: $bucket");
+            return true;
+        }
+
         if ($lists['items']) {
             $keys = array_column($lists['items'], 'key');
 
-            showLog('清理bucket, 批量删除', $keys);
+            showLog("清理bucket: $bucket , 批量删除", $keys);
 
             $config = new \Qiniu\Config();
             $bucketManager = new \Qiniu\Storage\BucketManager($this->auth, $config);
@@ -263,15 +269,17 @@ class Qiniu
 
             unset($config, $bucketManager);
 
-            // 递归
-            if (isset($lists['commonPrefixes'])) {
-                foreach ($lists['commonPrefixes'] as $cPrefix) {
-                    $this->cleanBucket($cPrefix);
-                }
-            }
-        } else {
-            showSuccLog("清理bucket完毕");
         }
+
+        // 递归
+        if (isset($lists['commonPrefixes'])) {
+            foreach ($lists['commonPrefixes'] as $cPrefix) {
+                $this->cleanBucket($cPrefix);
+            }
+        }
+
+        showSuccLog("清理bucket: $bucket 结束");
+        return true;
     }
 
 }

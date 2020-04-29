@@ -15,7 +15,7 @@ softcategory:
     - ide
 softicon:
     - paid
-softspecialtip: 特别说明
+softspecialtip: PHP是世界上最好的语言😎
 # 是否需要同步
 softsync: true
 # [可选]是否显示在软件列表页,默认为true , 可选值: true false

@@ -100,6 +100,15 @@ class Util
         });
     }
 
+    public static function dateSort(&$logList)
+    {
+        uksort($logList, function ($date1, $date2) {
+            $date1time = strtotime($date1);
+            $date2time = strtotime($date2);
+            return $date1time == $date2time ? 0 : ($date1time > $date2time ? -1 : 1);
+        });
+    }
+
     /**
      * 日期时间转为时间戳
      * @param $datetime

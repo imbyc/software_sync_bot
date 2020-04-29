@@ -29,9 +29,6 @@ class Generation
 
     public function setSoftData($data)
     {
-        if (!$data['softname']) {
-            throw new \Exception('softname为空');
-        }
         $this->softName = $data['softname'];
         $this->softDataDir = $this->dataDir . DIRECTORY_SEPARATOR . $this->softName;
         $this->syncData = $data;
@@ -61,9 +58,13 @@ class Generation
             foreach ($this->mergedData['release'] as $platform => $platItem) {
                 if ($platItem['lists']) {
                     $latestVersionItem = array_shift($platItem['lists']);
-                    if (!$data['datetime'] && !$data['timestamp'] && !$data['version']) {
-                        $data['version'] = $latestVersionItem['version'];
+                    if (!isset($data['datetime']) || !$data['datetime']) {
                         $data['datetime'] = $latestVersionItem['datetime'];
+                    }
+                    if (!isset($data['version']) || !$data['version']) {
+                        $data['version'] = $latestVersionItem['version'];
+                    }
+                    if (!isset($data['timestamp']) || !$data['timestamp']) {
                         $data['timestamp'] = $latestVersionItem['timestamp'];
                     }
                     $data['latestLists'][$platform] = $latestVersionItem;
@@ -256,17 +257,22 @@ EOF;
                         if (
                             isset($dwnFile['filethissync']) &&
                             $dwnFile['filethissync'] == true &&
-                            (
-                                !isset($oldData[$date][$platform][$version]) ||
-                                !in_array($dwnFile['filename'], $oldData[$date][$platform][$version])
-                            )
+                            (!isset($oldData[$date]) || array_search($dwnFile['filename'], array_column($oldData[$date], 'filename')) === false)
                         ) {
-                            $oldData[$date][$platform][$version][] = $dwnFile['filename'];
+                            $oldData[$date][] = [
+                                'platform' => $platform,
+                                'platformshowname' => $platItem['platformshowname'],
+                                'version' => $version,
+                                'filename' => $dwnFile['filename']
+                            ];
                         }
                     }
                 }
             }
         }
+
+        // 按日期排序
+        Util::dateSort($oldData);
 
         return Util::writeJsonFile($genFilename, $oldData);
     }
@@ -308,17 +314,22 @@ EOF;
                         if (
                             isset($dwnFile['filethissync']) &&
                             $dwnFile['filethissync'] == true &&
-                            (
-                                !isset($oldData[$date][$this->softName][$platform][$version]) ||
-                                !in_array($dwnFile['filename'], $oldData[$date][$this->softName][$platform][$version])
-                            )
+                            (!isset($oldData[$date][$this->softName]) || array_search($dwnFile['filename'], array_column($oldData[$date][$this->softName], 'filename')) === false)
                         ) {
-                            $oldData[$date][$this->softName][$platform][$version][] = $dwnFile['filename'];
+                            $oldData[$date][$this->softName][] = [
+                                'platform' => $platform,
+                                'platformshowname' => $platItem['platformshowname'],
+                                'version' => $version,
+                                'filename' => $dwnFile['filename']
+                            ];
                         }
                     }
                 }
             }
         }
+
+        // 按日期排序
+        Util::dateSort($oldData);
 
         $ret = Util::writeJsonFile($genFilename, $oldData);
 
@@ -351,16 +362,9 @@ EOF;
                 $mdText .= '## ' . $date . str_repeat(PHP_EOL, 2);
                 foreach ($dateItem as $softName => $softItem) {
                     $mdText .= '### ' . $softName . str_repeat(PHP_EOL, 2);
-                    foreach ($softItem as $platform => $platItem) {
-                        $mdText .= '#### ' . $platform . str_repeat(PHP_EOL, 2);
-                        foreach ($platItem as $version => $versionItem) {
-                            $mdText .= '##### ' . $version . str_repeat(PHP_EOL, 2);
-                            foreach ($versionItem as $num => $dwnFileName) {
-                                $mdText .= ($num + 1) . '. ' . $dwnFileName . str_repeat(PHP_EOL, 1);
-                            }
-                        }
+                    foreach ($softItem as $num => $updateItem) {
+                        $mdText .= ($num + 1) . ". `{$updateItem['platformshowname']}` `{$updateItem['version']}` {$updateItem['filename']}" . str_repeat(PHP_EOL, 1);
                     }
-
                 }
             }
         }
@@ -401,7 +405,7 @@ EOF;
                 foreach ($newItem['lists'] as $version => &$versionItem) {
                     if ($versionItem['downloadList']) {
                         foreach ($versionItem['downloadList'] as &$downloadFile) {
-                            unset($downloadFile['filethissync']);
+                            if (isset($downloadFile['filethissync'])) unset($downloadFile['filethissync']);
                         }
                     }
                 }

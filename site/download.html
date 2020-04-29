@@ -26,7 +26,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="">
+    <meta name="keywords" content="常用开发软件同步">
+    <meta name="description" content="常用开发软件同步，提升国内下载速度。">
     <meta name="author" content="cooldev.cn">
     <title>📥{{APPNAME}}-软件下载列表-常用开发软件同步📥</title>
     <link rel="Shortcut Icon" href="favicon.ico">
@@ -71,7 +72,7 @@
                             <h1 class="heading">{{APPNAME}} 下载列表
                                 <span style="font-size: 1.5rem;" id="latestversion">获取数据...</span>
                             </h1>
-                            <h3>最后检查时间：<span id="latestchecktime">获取数据...</span></h3>
+                            <h3>最后检查时间：<span id="lastchecktime">获取数据...</span></h3>
                             <div id="app_intro">
                                 <div style="text-align:center;">
                                     <img src="statics/img/loading.gif">
@@ -366,10 +367,10 @@
         type: "get",
         cache: false,
         success: function (a) {
-            $('#latestchecktime').html(dayjs.unix(a.timestamp).format('YYYY-MM-DD HH:mm:ss'));
+            $('#lastchecktime').html(dayjs.unix(a.timestamp).format('YYYY-MM-DD HH:mm:ss'));
         },
         error: function () {
-            $('#latestchecktime').html("等待更新");
+            $('#lastchecktime').html("等待更新");
         }
     });
 

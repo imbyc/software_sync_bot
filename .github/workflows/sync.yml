@@ -1,4 +1,4 @@
-name: Test
+name: Sync Task
 
 on: [push]
 
@@ -14,9 +14,9 @@ jobs:
       run: curl ipinfo.io
     - name: PHP版本
       run: php -v
-    - name: 测试同步
+    - name: 同步
       run: |
-        php sync/test.php
+        php sync/index.php
       env:
         QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
         QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
@@ -27,31 +27,15 @@ jobs:
         name: id_rsa # optional
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
         #config: ${{ secrets.CONFIG }} # ssh_config; optional
-    - name: 测试连接 Gitee
-      run: ssh -T git@gitee.com
-    - name: 测试提交文件到Gitee
+    - name: 提交文件到 Gitee
       run: |
-        mkdir build
-        git clone git@gitee.com:softsync/softsync.git build
-        cp -r site/. build
-        cp -r data/ build
-        cp -r app/ build
-        cd build
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "Add changes" -a
-        git push -u origin master
-        cd ../
-    - name: 更新 Gitee Pages
-      run: |
-        curl -X POST --header 'Content-Type: application/json;charset=UTF-8' 'https://gitee.com/api/v5/repos/softsync/softsync/pages/builds' -d '{"access_token":"${{ secrets.GITEE_ACCESS_TOKEN }}"}'
+        ./deploy/deploy2gitee.sh
     - name: 提交文件到 Github
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
-        git commit -m "Add changes" -a
+        git commit -m "🤖bot: Auto Update" -a
     - name: 推送更新
       uses: ad-m/github-push-action@master
       with:
