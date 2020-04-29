@@ -3,6 +3,8 @@
 </p>
 
 # Software Sync Bot
+![Sync Task](https://github.com/buyucoder/software_sync_bot/workflows/Sync Task/badge.svg?branch=master&event=schedule)![Update Site](https://github.com/buyucoder/software_sync_bot/workflows/Update Site/badge.svg?branch=master&event=push)
+
 常用开发软件自动下载同步到国内,提升下载速度
 
 网站:  http://softsync.gitee.io
@@ -11,7 +13,7 @@
 
 本项目是在学习 Github Action 时产生的项目，使用 Github Action 定时完成同步任务并生成部署网站页面。
 
-## 基本思路
+## 基本思路s
 
 找到软件的更新日志,通过更新日志获取版本和下载地址,然后将软件下载并上传到国内的云存储,再生成网站需要的数据
 
