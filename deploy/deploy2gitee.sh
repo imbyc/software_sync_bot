@@ -14,4 +14,4 @@ git push -u origin master
 cd ../
 
 # 更新 Gitee Pages
-curl -X POST --header 'Content-Type: application/json;charset=UTF-8' 'https://gitee.com/api/v5/repos/softsync/softsync/pages/builds' -d '{"access_token":"${{ secrets.GITEE_ACCESS_TOKEN }}"}'
+curl -X POST --header 'Content-Type: application/json;charset=UTF-8' 'https://gitee.com/api/v5/repos/softsync/softsync/pages/builds' -d '{"access_token":"${GITEE_ACCESS_TOKEN}"}'
