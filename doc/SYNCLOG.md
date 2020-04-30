@@ -1,5 +1,13 @@
 # 同步日志
 
+## 2020-04-30
+
+### phpstorm
+
+1. `Windows` `2020.1.1` PhpStorm-2020.1.1.exe
+2. `Windows-ZIP` `2020.1.1` PhpStorm-2020.1.1.win.zip
+3. `MacOS` `2020.1.1` PhpStorm-2020.1.1.dmg
+4. `Linux` `2020.1.1` PhpStorm-2020.1.1.tar.gz
 ## 2020-04-29
 
 ### fiddler
