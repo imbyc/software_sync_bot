@@ -3,7 +3,7 @@
 </p>
 
 # Software Sync Bot
-![Sync Task](https://github.com/buyucoder/software_sync_bot/workflows/Sync%20Task/badge.svg?branch=master&event=schedule)  ![Update Site](https://github.com/buyucoder/software_sync_bot/workflows/Update%20Site/badge.svg?branch=master&event=push)
+![Sync Task](https://github.com/buyucoder/software_sync_bot/workflows/Sync%20Task/badge.svg?branch=master&event=schedule)  ![Update Site](https://github.com/buyucoder/software_sync_bot/workflows/Update%20Site/badge.svg?branch=master&event=push)  ![Clean Transit Bucket](https://github.com/buyucoder/software_sync_bot/workflows/Clean%20Transit%20Bucket/badge.svg?branch=master&event=schedule)
 
 常用开发软件自动下载同步到国内,提升下载速度
 
