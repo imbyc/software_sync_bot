@@ -1,5 +1,12 @@
 # 同步日志
 
+## 2020-05-09
+
+### postman
+
+1. `Windows` `7.24.0` Postman-win64-7.24.0-Setup.exe
+2. `MacOS` `7.24.0` Postman-osx-7.24.0.zip
+3. `Linux(x64)` `7.24.0` Postman-linux-x64-7.24.0.tar.gz
 ## 2020-04-30
 
 ### phpstorm
