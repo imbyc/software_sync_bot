@@ -1,5 +1,14 @@
 # 同步日志
 
+## 2020-05-23
+
+### phpstorm
+
+1. `Windows` `2020.1` PhpStorm-2020.1.exe
+2. `Windows` `2019.3.2` PhpStorm-2019.3.2.exe
+### postman
+
+1. `Windows` `7.23.0` Postman-win64-7.23.0-Setup.exe
 ## 2020-05-22
 
 ### postman
