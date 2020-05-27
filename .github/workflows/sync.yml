@@ -41,6 +41,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
+        
         git commit -m "🤖bot: Auto Update" -a
     - name: Push更新到当前仓库
       uses: ad-m/github-push-action@master
