@@ -1,5 +1,17 @@
 # 同步日志
 
+## 2020-05-28
+
+### phpstorm
+
+1. `Windows-ZIP` `2019.3.3` PhpStorm-2019.3.3.win.zip
+### postman
+
+1. `Windows` `7.25.0` Postman-win64-7.25.0-Setup.exe
+2. `Windows` `7.22.1` Postman-win64-7.22.1-Setup.exe
+3. `MacOS` `7.25.0` Postman-osx-7.25.0.zip
+4. `MacOS` `7.23.0` Postman-osx-7.23.0.zip
+5. `Linux(x64)` `7.23.0` Postman-linux-x64-7.23.0.tar.gz
 ## 2020-05-23
 
 ### phpstorm
