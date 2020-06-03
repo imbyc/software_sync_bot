@@ -1,5 +1,13 @@
 # 同步日志
 
+## 2020-06-03
+
+### phpstorm
+
+1. `Windows` `2020.1.2` PhpStorm-2020.1.2.exe
+2. `Windows-ZIP` `2020.1.2` PhpStorm-2020.1.2.win.zip
+3. `MacOS` `2020.1.2` PhpStorm-2020.1.2.dmg
+4. `Linux` `2020.1.2` PhpStorm-2020.1.2.tar.gz
 ## 2020-05-28
 
 ### phpstorm
