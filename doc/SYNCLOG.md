@@ -1,5 +1,12 @@
 # 同步日志
 
+## 2020-06-08
+
+### postman
+
+1. `Windows` `7.26.0` Postman-win64-7.26.0-Setup.exe
+2. `MacOS` `7.26.0` Postman-osx-7.26.0.zip
+3. `Linux(x64)` `7.26.0` Postman-linux-x64-7.26.0.tar.gz
 ## 2020-06-06
 
 ### postman
