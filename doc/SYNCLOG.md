@@ -1,5 +1,10 @@
 # 同步日志
 
+## 2020-06-16
+
+### phpstorm
+
+1. `Linux` `2020.1.1` PhpStorm-2020.1.1.tar.gz
 ## 2020-06-10
 
 ### phpstorm
