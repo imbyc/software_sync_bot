@@ -7,6 +7,28 @@
 1. `Windows` `7.28.0` Postman-win64-7.28.0-Setup.exe
 2. `MacOS` `7.28.0` Postman-osx-7.28.0.zip
 3. `Linux(x64)` `7.28.0` Postman-linux-x64-7.28.0.tar.gz
+### fiddler
+
+1. `Windows` `5.0.20202.18177` FiddlerSetup-5.0.20202.18177.exe
+### phpstorm
+
+1. `Windows` `2020.1.3` PhpStorm-2020.1.3.exe
+2. `Windows` `2020.1.2` PhpStorm-2020.1.2.exe
+3. `Windows` `2020.1.1` PhpStorm-2020.1.1.exe
+4. `Windows` `2020.1` PhpStorm-2020.1.exe
+5. `Windows` `2019.3.4` PhpStorm-2019.3.4.exe
+6. `Windows-ZIP` `2020.1.3` PhpStorm-2020.1.3.win.zip
+7. `Windows-ZIP` `2020.1.2` PhpStorm-2020.1.2.win.zip
+8. `Windows-ZIP` `2020.1.1` PhpStorm-2020.1.1.win.zip
+9. `Windows-ZIP` `2020.1` PhpStorm-2020.1.win.zip
+10. `Windows-ZIP` `2019.3.4` PhpStorm-2019.3.4.win.zip
+11. `MacOS` `2020.1.3` PhpStorm-2020.1.3.dmg
+12. `MacOS` `2020.1.2` PhpStorm-2020.1.2.dmg
+13. `MacOS` `2020.1.1` PhpStorm-2020.1.1.dmg
+14. `MacOS` `2020.1` PhpStorm-2020.1.dmg
+15. `MacOS` `2019.3.4` PhpStorm-2019.3.4.dmg
+16. `Linux` `2020.1.3` PhpStorm-2020.1.3.tar.gz
+17. `Linux` `2020.1.2` PhpStorm-2020.1.2.tar.gz
 ## 2020-07-10
 
 ### phpstorm
