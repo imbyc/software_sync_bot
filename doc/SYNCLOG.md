@@ -7,6 +7,12 @@
 1. `Windows` `7.29.0` Postman-win64-7.29.0-Setup.exe
 2. `MacOS` `7.29.0` Postman-osx-7.29.0.zip
 3. `Linux(x64)` `7.29.0` Postman-linux-x64-7.29.0.tar.gz
+### phpstorm
+
+1. `Windows` `2020.1.4` PhpStorm-2020.1.4.exe
+2. `Windows-ZIP` `2020.1.4` PhpStorm-2020.1.4.win.zip
+3. `MacOS` `2020.1.4` PhpStorm-2020.1.4.dmg
+4. `Linux` `2020.1.4` PhpStorm-2020.1.4.tar.gz
 ## 2020-07-13
 
 ### postman
