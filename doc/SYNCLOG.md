@@ -1,5 +1,10 @@
 # 同步日志
 
+## 2020-07-26
+
+### phpstorm
+
+1. `Windows` `2020.1` PhpStorm-2020.1.exe
 ## 2020-07-24
 
 ### postman
