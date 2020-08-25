@@ -13,6 +13,8 @@
 
 1. `Windows` `2020.1.2` PhpStorm-2020.1.2.exe
 2. `MacOS` `2020.1.1` PhpStorm-2020.1.1.dmg
+3. `Linux` `2020.1.2` PhpStorm-2020.1.2.tar.gz
+4. `Linux` `2020.1.1` PhpStorm-2020.1.1.tar.gz
 ## 2020-08-19
 
 ### phpstorm
