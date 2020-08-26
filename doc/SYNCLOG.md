@@ -5,6 +5,11 @@
 ### phpstorm
 
 1. `Windows` `2020.1.1` PhpStorm-2020.1.1.exe
+### postman
+
+1. `Windows` `7.31.1` Postman-win64-7.31.1-Setup.exe
+2. `MacOS` `7.31.1` Postman-osx-7.31.1.zip
+3. `Linux(x64)` `7.31.1` Postman-linux-x64-7.31.1.tar.gz
 ## 2020-08-25
 
 ### postman
