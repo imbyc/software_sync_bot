@@ -5,6 +5,9 @@
 ### postman
 
 1. `MacOS` `7.30.0` Postman-osx-7.30.0.zip
+### fiddler
+
+1. `Windows` `5.0.20202.18177` FiddlerSetup-5.0.20202.18177.exe
 ## 2020-08-26
 
 ### phpstorm
