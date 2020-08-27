@@ -1,5 +1,10 @@
 # 同步日志
 
+## 2020-08-27
+
+### postman
+
+1. `MacOS` `7.30.0` Postman-osx-7.30.0.zip
 ## 2020-08-26
 
 ### phpstorm
