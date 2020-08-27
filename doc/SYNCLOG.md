@@ -8,6 +8,12 @@
 ### fiddler
 
 1. `Windows` `5.0.20202.18177` FiddlerSetup-5.0.20202.18177.exe
+### phpstorm
+
+1. `Windows` `2020.2.1` PhpStorm-2020.2.1.exe
+2. `Windows-ZIP` `2020.2.1` PhpStorm-2020.2.1.win.zip
+3. `MacOS` `2020.2.1` PhpStorm-2020.2.1.dmg
+4. `Linux` `2020.2.1` PhpStorm-2020.2.1.tar.gz
 ## 2020-08-26
 
 ### phpstorm
