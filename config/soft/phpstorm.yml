@@ -17,7 +17,7 @@ softicon:
     - paid
 softspecialtip: PHP是世界上最好的语言😎
 # 是否需要同步
-softsync: true
+softsync: 
 # [可选]是否显示在软件列表页,默认为true , 可选值: true false
 softshowinlist: true
 # [可选]是否显示软件平台,适合平台只有少量几个的时候,很多平台(5个以上)不要开,默认false
