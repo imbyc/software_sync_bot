@@ -1,5 +1,18 @@
 # 同步日志
 
+## 2020-09-27
+
+### postman
+
+1. `Windows` `7.33.1` Postman-win64-7.33.1-Setup.exe
+2. `Windows` `7.33.0` Postman-win64-7.33.0-Setup.exe
+3. `Windows` `7.32.0` Postman-win64-7.32.0-Setup.exe
+4. `MacOS` `7.33.1` Postman-osx-7.33.1.zip
+5. `MacOS` `7.33.0` Postman-osx-7.33.0.zip
+6. `MacOS` `7.32.0` Postman-osx-7.32.0.zip
+7. `Linux(x64)` `7.33.1` Postman-linux-x64-7.33.1.tar.gz
+8. `Linux(x64)` `7.33.0` Postman-linux-x64-7.33.0.tar.gz
+9. `Linux(x64)` `7.32.0` Postman-linux-x64-7.32.0.tar.gz
 ## 2020-08-27
 
 ### postman
