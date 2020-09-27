@@ -2,7 +2,7 @@ name: Sync Task
 
 on:
   schedule:
-    - cron:  '*/30 * * * *'
+    - cron:  '0 0-12/2 * * *'
 
 jobs:
   _SyncTask_:
