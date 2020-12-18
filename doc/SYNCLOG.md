@@ -1,5 +1,12 @@
 # 同步日志
 
+## 2020-12-18
+
+### postman
+
+1. `Windows` `7.36.1` Postman-win64-7.36.1-Setup.exe
+2. `MacOS` `7.36.1` Postman-osx-7.36.1.zip
+3. `Linux(x64)` `7.36.1` Postman-linux-x64-7.36.1.tar.gz
 ## 2020-11-26
 
 ### postman
