@@ -1,3 +1,6 @@
+
+**项目重构中**
+
 <p align="center">
   <img src="sync_128px.png">
 </p>
@@ -5,7 +8,7 @@
 # Software Sync Bot
 ![Sync Task](https://github.com/buyucoder/software_sync_bot/workflows/Sync%20Task/badge.svg?branch=master&event=schedule)  ![Update Site](https://github.com/buyucoder/software_sync_bot/workflows/Update%20Site/badge.svg?branch=master&event=push)  ![Clean Transit Bucket](https://github.com/buyucoder/software_sync_bot/workflows/Clean%20Transit%20Bucket/badge.svg?branch=master&event=schedule)
 
-**七牛云欠费，准备升级项目，使用新的存储**
+
 
 常用开发软件自动下载同步到国内,提升下载速度
 
